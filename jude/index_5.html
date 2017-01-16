@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>123</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+<style>
+	.test{margin-right:5px;margin:0 5px 0 0}
+</style>
+</head>
+<body>
+	<script type="text/javascript">
+		var temp = ['A','B','C','D'];
+		var temp2 = 'abcd';
+		
+		// console.log( temp.slice(2,4) );
+		// console.log( temp2.slice(2,4) );
+		// console.log( temp );
+		// console.log( temp2 );
+
+		// ========== 복습 ==========
+		// 메소드 method, function 함수 ()
+		// 프로퍼티 propertie
+		// 객체, first class (object, function)
+		
+		// 변수, string, number, boolean
+		var str = '';
+		var num = 23;
+		var test = 3 > 2;
+		console.log( test );
+		// operator + , - , * , / , % , && , || 
+		var op = 3 + 2;
+		console.log( op ); // 5
+		op += 9;
+		console.log( op ); // 14
+		op /= 2;
+		console.log( op ); // 7
+		op %= 3;
+		console.log( op ); // 6 ... 1
+		
+		var test1 = 3 > 2;
+		var test2 = 1 > 2;
+		if( test1 && test2 ){
+			console.log( '둘다 참' );
+		}else{
+			console.log( '하나는 거짓' );
+		}
+
+		if( test1 || test2 ){
+			console.log( '둘중 하나 참' );
+		}else{
+			console.log( '둘다 거짓' );
+		}
+
+		// 배열
+
+		var array = new Array();
+		console.log( array );
+		var array = [];
+		console.log( array );
+		var array = ['하나','둘','셋'];
+		console.log( array );
+
+		// 조건문 ( if, if else )
+		if( 3 > 2){
+			console.log( '참' );
+		}else{
+			console.log( '거짓' );
+		}
+		if( 1 > 2){
+			console.log( '참' );
+		}else{
+			console.log( '거짓' );
+		}
+
+		// 반복문 for, for in, while, do while,
+		for ( var i = 0 ; i < array.length ; i++ ){
+			console.log( i );
+		}
+		// object, propertie
+		var person = {
+			name : 'jude',
+			age : '31'
+		}
+		console.log( person.name );
+		console.log( person.age );
+		
+
+		// ========== 함수 ==========
+		// function 기능, 어떤 행위, ....
+		// 일반 함수, 익명 함수, 즉시 실행 함수,
+		// 인자, argument, param, parameter,
+
+		function print(str) {
+			console.log( str );
+		}
+		print( 'abc' );
+
+		function sum(num1, num2){
+			if(num1 < 1) {
+				return;
+			}
+			return num1 + num2;
+		}
+
+		function sum2(array){
+			var temp = 1;
+			for( i = 0; i < array.length; i++){
+				if(array[i] == 0){
+					return 0;
+				}else{
+					temp = temp * array[i];
+				}
+			}
+			return temp;
+		}
+		var result = sum2([6,2,3]);
+
+		console.log( result );
+
+		function calculate(str) {
+			eval(str);
+		}
+
+
+		
+
+		// var result = sum(1, 2);
+		// console.log( result );
+		// console.log( sum(1,2) );
+		// console.log( sum(0,2) );
+
+		// function doclick(param){
+		// 	$(param).on('click', function() {
+				
+		// 	});
+		// }
+		// doclick('.test');
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

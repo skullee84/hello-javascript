@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>계산기</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" type="text/css" href="css/pc.css">
+	<link rel="stylesheet" type="text/css" href="css/calcul.css">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<div class="wrap_cal">
+		<h1 class="tit_calcul">계산기</h1>
+		<h2 class="screen_out">연산버튼</h2>
+		<div class="list_calcul list_operation">
+			<button type="button" class="btn_cal opr_1">(</button>
+			<button type="button" class="btn_cal opr_2">)</button>
+			<button type="button" class="btn_cal opr_3">C</button>
+			<button type="button" class="btn_cal opr_4">⬅︎</button>
+			<button type="button" class="btn_cal opr_5">/</button>
+			<button type="button" class="btn_cal opr_6">X</button>
+			<button type="button" class="btn_cal opr_7">-</button>
+			<button type="button" class="btn_cal opr_8">+</button>
+			<button type="button" class="btn_cal opr_9">.</button>
+			<button type="button" class="btn_cal opr_0">=</button>
+		</div>
+		<h2 class="screen_out">숫자버튼</h2>
+		<div class="list_calcul" id="listNum">
+			<button type="button" class="btn_cal num0">0</button>
+			<button type="button" class="btn_cal num1">1</button>
+			<button type="button" class="btn_cal num2">2</button>
+			<button type="button" class="btn_cal num3">3</button>
+			<button type="button" class="btn_cal num4">4</button>
+			<button type="button" class="btn_cal num5">5</button>
+			<button type="button" class="btn_cal num6">6</button>
+			<button type="button" class="btn_cal num7">7</button>
+			<button type="button" class="btn_cal num8">8</button>
+			<button type="button" class="btn_cal num9">9</button>
+		</div>
+		<h2 class="screen_out">결과창</h2>
+		<div id="boxInp" class="box_inp"></div>	
+	</div>
+	<script type="text/javascript">
+		var bxInp = document.getElementById('boxInp');
+		var testing;
+		var reg1 = /.\D/;
+		var reg2 = /(\+|\-|\*|\/)$/;
+		// Clear
+		$('.opr_3').on('click', function() {
+			bxInp.innerHTML = 0;
+		});
+
+		// ) 뒤에 안써지도록 추가 필요
+		// Number
+		$('#listNum .btn_cal').on('click',function() {
+			if( testing == '계산완료' ){
+				bxInp.innerHTML = '';
+			}
+			var numText = this.innerText;
+			// console.log( bxInp.innerHTML.slice(bxInp.innerHTML.length-2,bxInp.innerHTML.length-1) );
+			if( bxInp.innerHTML.slice(bxInp.innerHTML.length-1) === ')' ){
+
+			}else{
+				if( bxInp.innerHTML === '0' ){
+					bxInp.innerHTML = '';
+				}
+				bxInp.innerHTML += numText;
+				testing = '계산 시작 또는 계산 재시작';
+			}
+		});
+		
+		// 정규식 추가 필요
+		// (
+		$('.opr_1').on('click',function() {
+			if( testing == '계산완료' ){
+				bxInp.innerHTML = '';
+			}
+			var numText = this.innerText;
+			if( bxInp.innerHTML === '0' ){
+				bxInp.innerHTML = '';
+			}
+			bxInp.innerHTML += numText;
+			testing = '계산 시작 또는 계산 재시작';
+		});
+		
+		// )
+		$('.opr_2').on('click',function() {
+			if( testing == '계산완료' ){
+				bxInp.innerHTML = '';
+			}
+			var numText = this.innerText;
+			if( !(bxInp.innerHTML.length === 1) ){
+				if( bxInp.innerHTML === '0' || bxInp.innerHTML === '' ){
+					bxInp.innerHTML = '';
+				}else{
+					bxInp.innerHTML += numText;
+				}
+			}
+			testing = '계산 시작 또는 계산 재시작';
+		});
+
+		// 정규식 수정 필요
+		// bxInp.innerHTML 이 0 또는 ''일 때 1번, 처음 ~ 연산자 1번, 연산자 ~ 연산자 사이의 숫자 1번, ) 뒤에 X
+		// point
+		$('.opr_9').on('click', function() {
+			if( testing == '계산완료' ){
+				bxInp.innerHTML = '';
+			}
+			if( !reg1.test(bxInp.innerText) ){
+				bxInp.innerHTML += '.';
+			}
+			testing = '계산 시작 또는 계산 재시작';
+		});
+		
+		// Operator
+		function test(selectTest, arg){
+			$(selectTest).on('click',function(){
+				if( testing == '계산완료' ){
+					testing = '계산 시작 또는 계산 재시작';
+				}
+				if(reg2.test(bxInp.innerHTML)){
+					bxInp.innerHTML = bxInp.innerHTML.slice(0,bxInp.innerHTML.length-1);
+					bxInp.innerHTML += arg;
+				}else{
+					bxInp.innerHTML += arg;
+				}
+			});
+		}
+		test('.opr_8','+');
+		test('.opr_7','-');
+		test('.opr_6','*');
+		test('.opr_5','/');
+
+		// =
+		$('.opr_0').on('click', function() {
+			if(reg2.test(bxInp.innerHTML)){
+				bxInp.innerHTML = bxInp.innerHTML.slice(0,bxInp.innerHTML.length-1);
+				bxInp.innerHTML = eval(bxInp.innerHTML);
+			}else{
+				bxInp.innerHTML = eval(bxInp.innerHTML);
+			}
+			testing = '계산완료';
+		});
+
+		// ⬅︎
+		$('.opr_4').on('click', function() {
+			if(bxInp.innerHTML.length == 1){
+				bxInp.innerHTML = 0;
+			}else{
+				bxInp.innerHTML = bxInp.innerHTML.slice(0,bxInp.innerHTML.length-1);
+			}
+		});
+
+		
+		/*
+		var a = document.getElementById('listNum');
+		var b = a.getElementsByClassName('btn_cal')[0];
+		this.b.onclick = function(){
+			var c = this.innerText;
+			console.log( c );
+		}
+		*/
+
+		/*
+		$('.test1').on('click', function() {
+			$('body').addClass('on');
+		});
+		$('.test2').on('click', function() {
+			$('body').removeClass('on');
+		});
+
+		function custom( select1, select2 ) {
+			$(select1).on('click', function() {
+				$(select2).addClass('on');
+				$(select3).removeClass('on');
+			});
+		}
+		custom('.test1');
+		custom('.test2');
+		*/
+	</script>
+</body>
+</html>

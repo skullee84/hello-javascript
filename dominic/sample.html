@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="css/admin.css">
+  <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+  <style>
+    .kakaostyle_guide {display:block;width:1100px;padding-top:20px;margin:0 auto;}
+    .kakaostyle_guide h1 {font-size:40px;font-weight:400;color:#1a1a1a;letter-spacing:-1px;}
+    .kakaostyle_guide .txt_infoma {font-size:32px;line-height:42px;letter-spacing:-1.5px;font-weight:100;color:#cacaca;padding-bottom:20px;margin-bottom:50px;border-bottom:1px solid #bebebe}
+    .kakaostyle_guide .menu {overflow:hidden;margin-bottom:50px;text-align:center}
+    .kakaostyle_guide .menu .inner {display:inline-block;}
+    .kakaostyle_guide .menu h2 {margin-bottom:30px;letter-spacing:3px;font-weight:normal}
+    .kakaostyle_guide .menu li {float:left;width:90px}
+    .kakaostyle_guide .menu a {display:block}
+    .kakaostyle_guide .ico_num {display:block;font-size:11px;font-weight:bold;text-decoration:underline;color:#21292e;}
+    .kakaostyle_guide .guide_cont {padding:30px 50px;background-color:#eaeaea}
+    .kakaostyle_guide .guide_cont h2{position:relative;margin-bottom:5px;padding-left:2px;font-size:15px}
+    .kakaostyle_guide .guide_cont .design{position:relative;padding:20px;margin-bottom:70px;background-color:#fff}
+    .kakaostyle_guide .guide_cont .design .btn_modify{position:relative}
+    .kakaostyle_guide .link_layer_test {display:block}
+    .kakaostyle_guide .layer_test {display:none}
+  </style>
+</head>
+<body>
+  <div class="kakaostyle_guide">
+    <h1>카카오스타일 마케팅센터 가이드</h1>
+    <p class="txt_infoma">공통관련 편의성을 위해 가이드를 제작했습니다.<br>참고하시어 사용하시면 됩니다.<br>해당 박스의 코드 발췌하여 사용하세요.</p>
+    <div class="menu">
+      <h2>해당 메뉴를 클릭하면 바로 이동 됩니다.</h2>
+      <div class="inner">
+        <ul>
+          <li><a href="#guide1"><span class="ico_num">01</span>버튼</a></li>
+          <li><a href="#guide2"><span class="ico_num">02</span>소제목<br>안내텍스트</a></li>
+          <li><a href="#guide3"><span class="ico_num">03</span>행테이블</a></li>
+          <li><a href="#guide4"><span class="ico_num">04</span>셀렉트박스</a></li>
+          <li><a href="#guide5"><span class="ico_num">05</span>인풋</a></li>
+          <li><a href="#guide6"><span class="ico_num">06</span>탭</a></li>
+          <li><a href="#guide7"><span class="ico_num">07</span>레이어</a></li>
+          <li><a href="#guide7"><span class="ico_num">08</span>페이징</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- guide style -->
+    <div class="guide_cont">
+
+      <div id="guide8">
+        <h2><span class="ico_dot"></span>페이징</h2>
+        <div class="design">
+          <div class="paging_comm">
+            <div class="inner_paging">
+              <span class="screen_out">이전페이지 없음</span> <!-- 이전페이지 없을 경우, 대체텍스트 추가 -->
+              <a href="#none" class="link_page link_first"><span class="ico_comm">첫페이지 이동</span></a>
+              <a href="#none" class="link_page link_prev"><span class="ico_comm">이전</span></a>
+              <a href="#none" class="link_page on">1<span class="screen_out">현재페이지</span></a> <!-- 활성화 페이지 : on 클래스 부여 / 대체텍스트 추가 -->
+              <a href="#none" class="link_page">2</a>
+              <a href="#none" class="link_page">3</a>
+              <a href="#none" class="link_page">4</a>
+              <a href="#none" class="link_page">5</a>
+              <a href="#none" class="link_page link_next"><span class="ico_comm">다음</span></a>
+              <a href="#none" class="link_page link_last"><span class="ico_comm">끝페이지 이동</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- // guide end -->
+  </div>
+
+  <script>
+  $('.link_page').on('click', function(e) {
+    var clazzList = this.classList;
+
+    var hasClass = false;
+    for(var i = 0; i < clazzList.length; i++) {
+      if(['link_first', 'link_prev', 'link_last', 'link_next'].includes(clazzList[i])) {
+        hasClass = true;
+      }
+    }
+
+    if(!hasClass) {
+      var linkPages = document.getElementsByClassName('link_page');
+      for(var i = 0; i < linkPages.length; i++) {
+        linkPages[i].className = linkPages[i].className.replace(' on', '');
+      }
+      this.classList.add('on');
+    }
+
+    // 위와 같음..아마도 ?
+    // if( !$(this).is('.link_first, .link_prev, .link_last, .link_next') ){
+    //   $('.link_page').removeClass('on');
+    //   $(this).addClass('on');
+    // }
+  });
+  </script>
+</body>
+</html>

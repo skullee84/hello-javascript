@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>모듈화</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+  <style>
+    .btn_comm {width:80px;height:50px;background-color:#fff;border:1px solid #efefef}
+    .btn_on {background-color:tan}
+  </style>
+</head>
+<body>
+  <button type="button" class="btn_comm ">버튼이지롱</button>
+  <button type="button" class="btn_comm ">버튼이지롱</button>
+  <button type="button" class="btn_comm ">버튼이지롱</button>
+  <button type="button" class="btn_comm ">버튼이지롱</button>
+  <button type="button" class="btn_comm ">버튼이지롱</button>
+  <button type="button" class="btn_comm ">버튼이지롱</button>
+  <button type="button" class="btn_comm ">버튼이지롱</button>
+  <button type="button" class="btn_comm ">버튼이지롱</button>
+</body>
+<script type="text/javascript">
+  var clickEvent = {
+    // onEvent : function(target) {
+    //   $(target).on('click', active);
+    // }
+    has : function(target, add) {
+      return $(target).hasClass(add);
+    },
+    remove: function(target, add) {
+      $(target).removeClass(add);
+    },
+    add : function(target, add) {
+      $(target).addClass(add);
+    }
+  }
+
+// clickEvent.onEvent('click', )
+  $('.btn_comm').on('click', function() {
+    if(clickEvent.has('.btn_comm', 'btn_on')) {
+      clickEvent.remove('.btn_comm', 'btn_on')
+    };
+    clickEvent.add(this, 'btn_on');
+  });
+
+
+
+
+  var checked = {
+  		findEvent : function(targerParents, finder) {
+  			if( $(this).parents(targerParents).hasClass('on') ){
+  				$(this).parents(targerParents).removeClass('on');
+  				$(this).parents(targerParents).find(finder).removeClass('on');
+  			}else{
+  				$(this).parents(targerParents).addClass('on');
+  				$(this).parents(targerParents).find(finder).addClass('on');
+  			}
+  		},
+  		onEvent : function(targerParents) {
+  			if( $(this).parents(targerParents).hasClass('on') ){
+  				$(this).parents(targerParents).removeClass('on');
+  			}else{
+  				$(this).parents(targerParents).addClass('on');
+  			}
+  		};
+  	};
+  	$('.head_board .ico_check').on('click',
+    checked.findEvent('.check_inp', '.list_board .check_inp'))
+</script>
+
+</html>

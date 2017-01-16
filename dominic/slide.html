@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="libs/bootstrap-4.0.0-alpha.5-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="libs/tether-1.3.3/dist/css/tether.min.css">
+  <link rel="stylesheet" href="libs/animate.css">
+
+  <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="libs/tether-1.3.3/dist/js/tether.min.js"></script>
+  <script type="text/javascript" src="libs/bootstrap-4.0.0-alpha.5-dist/js/bootstrap.min.js"></script>
+  <style>
+  img {
+    width: 420px;
+    height: 600px;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="card card-outline-info mt-3">
+        <div class="card-block p-0">
+          <div class="dominic-slider text-xs-center">
+            <img class="thumb_img" src="images/1.jpg" />
+          </div>
+        </div>
+
+        <div class="card-footer text-xs-center">
+          <div class="btn-group" role="group" aria-label="First group">
+            <button type="button" class="btn btn-secondary prevBtn"><</button>
+            <button type="button" class="btn btn-secondary nextBtn">></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="js/common.js"></script>
+  <script>
+  $(function() {
+    var Slider = new SliderController({
+      target: '.thumb_img',
+      images: [
+        'images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg'
+      ]
+    });
+
+    $('.prevBtn').on('click', function() {
+      Slider.prev();
+    });
+
+    $('.nextBtn').on('click', function() {
+      Slider.next();
+    });
+  });
+  </script>
+</body>
+</html>

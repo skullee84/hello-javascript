@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>123</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<div>
+		<h1>2222</h1>
+		<p id="userName">123123123123123</p>
+		<input type="text" name="" id="english" value="" />
+		<input type="text" name="" id="math" value="" />
+		<input type="text" name="" id="korean" value="" />
+		<input type="text" name="" id="historys" value="" />
+		<button type="button" id="btnCal">계산</button>
+		<p>
+			학점은 : xxx 입니다.
+		</p>
+	</div>
+<script type="text/javascript">
+	// 둘째날
+	var number = 0;
+	number += 4; // number = number + 4;
+	// console.log(number);
+
+	number -= 2; // number = number - 2;
+	// console.log(number);
+
+	number *= 4; // number = number * 4;
+	// console.log(number);
+
+	number /= 4; // number = number / 4;
+	// console.log(number);
+
+	var str = 'string.....'
+	var condition = true; // false
+	var obj = {};
+	var func = function(){
+
+	};
+
+	var english = 100;
+	var maths = 50;
+	var korean = 90;
+	var historys = 40;
+	var average = (english + maths + korean + historys) / 4;
+	// console.log(average);
+	
+	var grade;
+
+	if ( average < 90 && average >= 80 ) {
+		grade = 'A';
+	}else if ( average < 80 && average >= 70 ) {
+		grade = 'B';
+	}else if ( average < 70 && average >= 60 ){
+		grade = 'C';
+	}else{
+		grade = 'F';
+	}
+	// console.log(grade);
+	var person = {
+		name : 'jude',
+		age : '31',
+		height : '182',
+		inside : {
+			brain : '120',
+			magic : '5000'
+		}
+	};
+
+	var animal = {
+		name : 'lion',
+		age : '15'
+	};
+
+	var key = 'name';
+	var ageKey = 'age';
+	var brainKey = 'brain';
+	
+
+	// ========== object ==========
+	// object person의 키 값을 담음 변수를 호출하면 해당 키의 value값 리턴.
+		// console.log(person[key]);
+	// object person의 키 값을 호출하면 해당 키의 value값 리턴.
+		// console.log(person['name']);
+		// console.log(person.name);
+	// value 값이 또 다른 object 가 될 수 있다. 접근방법은 모든 경로를 빠짐없이 잇달아 써야함.
+		// console.log(person['inside'][brainKey])
+
+
+	// ========== 배열 ==========
+	// 배열은 인덱스를 갖는다.
+
+	var stringArray = ['dominic', 'dia', 'jude']; // new Array();
+	// var numberArray = ['0', '1', '2', '3'];
+	
+	// console.log(stringArray.length);
+
+	// 구구단
+	// for( var i = 1; i < 10; i++ ) {
+	// 	var temp = '';
+	// 	for( j = 2 ; j < 10 ; j++ ){
+	// 		var result = j + ' x ' + i + ' = ' + j*i + '\t';
+	// 		temp += result;
+	// 	}
+	// 	console.log( temp );
+	// }
+
+
+	// *
+	// **
+	// ***
+	// ****
+	// *****
+	// ****
+	// ***
+	// **
+	// *
+	// var temp = '';
+	// for( i = 1 ; i <= 9 ; i++ ){
+	// 	if( i <= 5){
+	// 		temp = temp + '*';
+	// 		console.log( temp );
+	// 	}else if( i > 5 ){
+	// 			temp = temp.substr(1)
+	// 			console.log( temp );
+	// 	}
+	// }
+
+</script>
+</body>
+</html>

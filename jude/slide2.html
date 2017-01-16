@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>123</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+	<style type="text/css">
+		*{margin:0;padding:0}
+		ul,li{list-style:none}
+		.wrap_slide{overflow:hidden;position:relative;width:400px;height:360px;margin:0 auto}
+		.slide{overflow:hidden;position:absolute;top:0;left:0}
+		.slide li{float:left}
+		.wrap_btn{float:right;margin-top:300px}
+		.btn_g{float:left;width:30px;height:30px;margin:5px 0 0 5px;vertical-align:top;cursor:pointer}
+		.link_thumb{display:block}
+		.link_thumb img{vertical-align:top}
+	</style>
+</head>
+<body>
+	<div class="wrap_slide">
+		<ul class="slide">
+			<li><a href="#none" class="link_thumb"><img src="images/1.png" width="400" height="300" alt=""></a></li>
+			<li><a href="#none" class="link_thumb"><img src="images/2.png" width="400" height="300" alt=""></a></li>
+			<li><a href="#none" class="link_thumb"><img src="images/3.png" width="400" height="300" alt=""></a></li>
+			<li><a href="#none" class="link_thumb"><img src="images/4.png" width="400" height="300" alt=""></a></li>
+			<li><a href="#none" class="link_thumb"><img src="images/5.png" width="400" height="300" alt=""></a></li>
+		</ul>
+		<div class="wrap_btn">
+			<button type="button" class="btn_g btn_prev"> &lt; </button>
+			<button type="button" class="btn_g btn_next"> &gt; </button>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var slide_ul = $('.slide');
+		var slide_li = $('.slide li');
+		var li_width = slide_li.width(); // li의 너비
+		var li_count = slide_li.length; // li의 갯수
+		var ul_width = li_width*li_count; // li 갯수에 따른 ul의 너비
+		$('.slide').css('width',ul_width); // li 갯수에 맞춰서 ul 너비 지정
+		var slideAuto = setInterval( function(){ slideBtn('next',500) }, 1000 );		
+		btnClick('.btn_prev','prev',500);
+		btnClick('.btn_next','next',500);
+		mouseOver('.slide');
+		mouseOver('.btn_g');
+		mouseLeave('.slide');
+		mouseLeave('.btn_g');
+
+		// 클릭 로직
+		function btnClick(select,dir,speed){
+			$(select).on('click', function() {
+				slideBtn(dir,speed);
+			});
+		}
+		// 버튼 방향 로직
+		function slideBtn(dir,speed){
+			if( !(slide_ul.is(':animated')) ){
+				if(dir == 'next'){
+					slide_ul.stop().animate({left:-li_width}, speed, function(){
+						slide_ul.css('left','0');
+						slide_ul.append( $('.slide li').first() ); // .slide li 위치를 다시 체크
+					});
+				}else if(dir == 'prev'){
+					slide_ul.css('left',-li_width); // ul 을 앞으로 -400px 
+					slide_ul.prepend( $('.slide li').last() ); // 마지막 li 를 맨 앞으로 
+					slide_ul.stop().animate({left:0} , speed );
+				}
+			}
+		}
+		// 마우스 hover
+		function mouseOver(select){
+			$(select).on('mouseover', function() {
+				stopSlide();
+			});
+		}
+		// 마우스 Leave
+		function mouseLeave(select){
+			$(select).on('mouseleave', function() {
+				slideStart();
+			});
+		}
+		// slide 시작
+		function slideStart(){
+			slideAuto = setInterval( function(){ slideBtn('next',500) }, 1000 );
+		}
+		// slide 중지
+		function stopSlide() {
+			clearInterval(slideAuto);
+		}
+	</script>
+</body>
+</html>

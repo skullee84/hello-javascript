@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>계산기</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+  <style>
+    .calculator {overflow:hidden;width:500px;height:725px;margin:100px auto;}
+    .btn_comm {float:left;width:125px;height:125px;background-color:#000;color:#fff;border:1px solid #191919;font-size:20px;box-sizing:border-box;}
+    .btn_cencle {width:375px}
+    .btn_result {width:250px}
+    #txtResult {float:left;width:500px;height:100px;padding:0 30px;border:1px solid #191919;font-size:40px;line-height:100px;box-sizing:border-box;text-align:right;}
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="txtResult" value="0">
+    <button type="button" value="AC" class="btn_comm btn_cencle">AC</button>
+    <button type="button" value="/" class="btn_comm">/</button>
+    <button type="button" class="btn_comm">7</button>
+    <button type="button" class="btn_comm">8</button>
+    <button type="button" class="btn_comm">9</button>
+    <button type="button" class="btn_comm">*</button>
+    <button type="button" class="btn_comm">4</button>
+    <button type="button" class="btn_comm">5</button>
+    <button type="button" class="btn_comm">6</button>
+    <button type="button" class="btn_comm">-</button>
+    <button type="button" class="btn_comm">1</button>
+    <button type="button" class="btn_comm">2</button>
+    <button type="button" class="btn_comm">3</button>
+    <button type="button" class="btn_comm">+</button>
+    <button type="button" class="btn_comm">0</button>
+    <button type="button" class="btn_comm">.</button>
+    <button type="button" class="btn_comm btn_result">=</button>
+  </div>
+</body>
+<script type="text/javascript">
+
+$(function() {
+
+    var txt = '';
+    var innerTxt = document.getElementsByClassName('btn_comm')
+    var txtResult = $('#txtResult');
+
+    $('.btn_comm').on('click', function() {
+
+        var numTxt = $(this).text();
+        $('#txtResult').val(numTxt == 'C' ? '' : txtResult.val() + numTxt);
+        $(this).blur();
+        console.log(numTxt)
+
+    });
+
+    $('.btn_result').on('click', function() {
+
+        $('#txtResult').val(eval())
+
+    });
+
+});
+</script>
+</html>

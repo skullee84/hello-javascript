@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+.wrap_cal{overflow:hidden;position:relative;width:430px;margin:20px;padding:10px;background:#808080;text-align:center}
+.tit_calcul{font-size:24px;line-height:36px;color:#fff;padding-bottom:60px}
+.list_calcul{overflow:hidden;position:relative;width:330px;height:240px}
+.list_operation{overflow:visible;position:relative;z-index:10;width:440px;height:60px}
+.list_calcul .btn_cal{overflow:hidden;position:absolute;right:0;bottom:0;width:100px;height:50px;margin:10px 10px 0 0;font-size:20px;line-height:52px;background:#fff;cursor:pointer}
+.list_calcul .btn_cal:hover{box-sizing:border-box;border:2px solid #000;line-height:48px}
+.list_calcul .opr_0:hover{color:#fff;background:#437dff;border:0 none;line-height:52px}
+.list_calcul .opr_0{right:110px;top:240px}
+.list_calcul .opr_1{left:0}
+.list_calcul .opr_2{left:110px}
+.list_calcul .opr_3{right:110px}
+.list_calcul .opr_4{right:0}
+.list_calcul .opr_5{right:0;top:60px}
+.list_calcul .opr_6{right:0;top:120px}
+.list_calcul .opr_7{right:0;top:180px}
+.list_calcul .opr_8{right:0;top:240px}
+.list_calcul .opr_9{left:110px;top:240px}
+.list_calcul .num0{top:180px;left:0}
+.list_calcul .num1{top:120px;left:0}
+.list_calcul .num2{top:120px;left:110px}
+.list_calcul .num3{top:120px;right:0}
+.list_calcul .num4{top:60px;left:0}
+.list_calcul .num5{top:60px;left:110px}
+.list_calcul .num6{top:60px;right:0}
+.list_calcul .num7{top:0;left:0}
+.list_calcul .num8{top:0;left:110px}
+.list_calcul .num9{top:0;right:0}
+
+.box_inp{position:absolute;top:56px;left:10px;width:430px;height:50px;padding-right:10px;box-sizing:border-box;font-size:26px;line-height:52px;background:#fff;text-align:right}

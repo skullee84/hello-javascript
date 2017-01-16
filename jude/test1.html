@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>123</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+	<style type="text/css">
+		@charset "utf-8";
+		/* reset */
+		body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button{margin:0;padding:0}
+		fieldset,img{border:0 none}
+		dl,ul,ol,menu,li{list-style:none}
+		blockquote, q{quotes:none}
+		blockquote:before, blockquote:after,q:before, q:after{content:'';content:none}
+		input,select,textarea,button{vertical-align:middle}
+		input::-ms-clear{display:none}
+		button{border:0 none;background-color:transparent;cursor:pointer}
+		body{width:100%;background:#fff}
+		html, body{width:100%;height:100%}
+		body,th,td,input,select,textarea,button{font-size:14px;line-height:1.5;font-family:'Apple SD Gothic Neo',AppleGothic,'맑은 고딕',Dotum,'돋움',Arial,sans-serif;color:#444}
+		a{color:#444;text-decoration:none}
+		a:active, a:hover{text-decoration:underline}
+		address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:normal}
+		article, aside, footer, header, hgroup, main, nav, section{display:block}
+		table{border-spacing:0}
+		/* global */
+		#kakaoIndex{overflow:hidden;position:absolute;left:-9999px;width:0;height:1px;margin:0;padding:0}
+		.ir_wa{display:block;overflow:hidden;position:relative;width:100%;height:100%;z-index:-1}
+		.screen_out{overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px}
+		.show{display:block !important}
+		.hide{display:none !important}
+
+		/* Images Common */
+		.txt_comm{display:block;overflow:hidden;font-size:0;line-height:0;background:url(http://html.gt.dev.daum.net/kakaostylemc-2016/admin/images/txt_comm.png) 0 0 no-repeat;text-indent:-9999px}
+		.tit_comm{display:block;overflow:hidden;height:40px;margin-top:70px;font-size:0;line-height:0;background:url(http://html.gt.dev.daum.net/kakaostylemc-2016/admin/images/tit_comm.png) 0 0 no-repeat;text-indent:-9999px}
+		.ico_comm{display:block;overflow:hidden;font-size:0;line-height:0;background:url(http://html.gt.dev.daum.net/kakaostylemc-2016/admin/images/ico_comm.png) 0 0 no-repeat;text-indent:-9999px}
+		.ico_info{position:absolute;top:-62px;left:50%;width:120px;height:110px;margin-left:-60px;background:url(http://html.gt.dev.daum.net/kakaostylemc-2016/admin/images/ico_info.png)}
+
+		/* Layout */
+		#kakaoWrap{position:relative;min-width:1100px;min-height:100%}
+		#mArticle:after{display:block;clear:both;content:'';}
+		.kakaostyle_admin{overflow:hidden;min-width:1100px}
+		.kakaostyle_head{position:relative;background-color:#383838}
+		.kakaostyle_head .inner_head{max-width:1278px;min-width:1100px;height:71px;margin:0 auto}
+		.kakaostyle_foot{position:absolute;bottom:0;width:100%;min-width:1100px;padding:65px 0 64px;background-color:#f7f7f7;text-align:center} /* 디아 */
+		#kakaoContent{max-width:1280px;min-width:1100px;margin:0 auto;padding:38px 0 295px}
+
+		/* header */
+		.tit_logo{float:left;padding-right:85px}
+		.tit_logo .link_logo{display:block;width:100%;padding:26px 0 25px}
+		.tit_logo .txt_logo{width:210px;height:20px;background-position:0 0}
+		.user_profile{float:right;padding-top:14px}
+		.user_profile .link_profile{float:left;margin-right:9px;color:#e8e8e8}
+		.user_profile .link_profile:hover{text-decoration:none}
+		.user_profile .link_profile .txt_user{font-weight:bold}
+		.user_profile .link_logout{float:left;color:#e8e8e8;text-decoration:underline}
+
+		/* gnb */
+		.admin_gnb{float:left}
+		.list_gnb{height:71px}
+		.list_gnb li{float:left}
+		.list_gnb .link_gnb{display:block;padding:26px 15px 25px}
+		.list_gnb .link_gnb .txt_home{width:62px;height:20px;background-position:-70px -60px}
+		.list_gnb .link_gnb .txt_hotitem{width:95px;height:20px;background-position:-100px -80px}
+		.list_gnb .link_gnb .txt_brand{width:95px;height:20px;background-position:-100px -100px}
+		.list_gnb .link_gnb .txt_stats{width:60px;height:20px;background-position:-60px -120px}
+		.list_gnb .link_gnb .txt_contract{width:60px;height:20px;background-position:-60px -140px}
+		.list_gnb .link_gnb .txt_noti{width:66px;height:20px;background-position:-120px -140px}
+		.list_gnb .gnb_sub{display:none}
+		.list_gnb .on .gnb_sub{display:block}
+		.list_gnb .on .txt_home{background-position:0 -60px}
+		.list_gnb .on .txt_hotitem{background-position:0 -80px}
+		.list_gnb .on .txt_brand{background-position:0 -100px}
+		.list_gnb .on .txt_stats{background-position:0 -120px}
+		.list_gnb .on .txt_contract{background-position:0 -140px}
+		.list_gnb .on .txt_noti{background-position:-120px -120px}
+		.gnb_sub{position:absolute;top:71px;left:0;width:100%;border-bottom:1px solid #e8e8e8}
+		.gnb_sub .inner_gnb_sub{overflow:hidden;width:1100px;max-width:1278px;margin:0 auto;height:38px;margin-bottom:-1px;-webkit-box-sizing:border-box;box-sizing:border-box}
+		.gnb_sub .inner_gnb_sub li{margin-right:14px}
+		.gnb_sub .inner_gnb_sub .link_sub{display:block;padding:10px 9px 11px}
+		.gnb_sub .link_sub .txt_main{width:24px;height:15px;background-position:-30px -160px}
+		.gnb_sub .link_sub .txt_inquiry{width:50px;height:15px;background-position:-110px -160px}
+		.gnb_sub .link_sub .txt_account{width:50px;height:15px;background-position:-50px -180px}
+		.gnb_sub .link_sub .txt_matter{width:50px;height:15px;background-position:-160px -180px}
+		.gnb_sub .link_sub .txt_shopprof{width:50px;height:15px;background-position:-60px -200px}
+		.gnb_sub .link_sub .txt_product{width:26px;height:15px;background-position:-150px -200px}
+		.gnb_sub .link_sub .txt_news{width:26px;height:15px;background-position:-30px -220px}
+		.gnb_sub .link_sub .txt_coupon{width:26px;height:15px;background-position:-90px -220px}
+		.gnb_sub .link_sub .txt_hot{width:50px;height:15px;background-position:-60px -240px}
+		.gnb_sub .link_sub .txt_brandshop{width:53px;height:15px;background-position:-180px -240px}
+		.gnb_sub .link_sub .txt_change{width:64px;height:15px;background-position:-70px -260px}
+		.gnb_sub .link_sub .txt_top{width:47px;height:15px;background-position:-190px -260px}
+		.gnb_sub .link_sub .txt_notice{width:52px;height:15px;background-position:-180px -220px}
+		.gnb_sub .link_sub .txt_fqa{width:28px;height:15px;background-position:-210px -200px}
+		.gnb_sub .sub_on .link_sub{border-bottom:2px solid #383838}
+		.gnb_sub .sub_on .txt_main{background-position:0 -160px}
+		.gnb_sub .sub_on .txt_inquiry{background-position:-60px -160px}
+		.gnb_sub .sub_on .txt_account{background-position:0 -180px}
+		.gnb_sub .sub_on .txt_matter{background-position:-100px -180px}
+		.gnb_sub .sub_on .txt_shopprof{background-position:0 -200px}
+		.gnb_sub .sub_on .txt_product{background-position:-120px -200px}
+		.gnb_sub .sub_on .txt_news{background-position:0 -220px}
+		.gnb_sub .sub_on .txt_coupon{background-position:-60px -220px}
+		.gnb_sub .sub_on .txt_hot{background-position:0 -240px}
+		.gnb_sub .sub_on .txt_brandshop{background-position:-120px -240px}
+		.gnb_sub .sub_on .txt_change{background-position:0 -260px}
+		.gnb_sub .sub_on .txt_top{background-position:-140px -260px}
+		.gnb_sub .sub_on .txt_notice{background-position:-120px -220px}
+		.gnb_sub .sub_on .txt_fqa{background-position:-180px -200px}
+		.gnb_home .inner_gnb_sub{padding-left:221px}
+		.gnb_hotitem .inner_gnb_sub{padding-left:311px}
+		.gnb_brand .inner_gnb_sub{padding-left:428px}
+		.gnb_stats .inner_gnb_sub{padding-left:546px}
+		.gnb_noti .inner_gnb_sub{padding-left:722px}
+			/* Join */
+		.list_gnb .gnb_home .txt_join01{width:110px;height:20px;background-position:0 -280px}
+		.list_gnb .gnb_home .txt_join02{width:79px;height:20px;background-position:0 -300px}
+		.list_gnb .gnb_home .txt_join03{width:111px;height:20px;background-position:0 -320px}
+		.list_gnb .gnb_home .txt_join04{width:134px;height:20px;background-position:0 -340px}
+		.list_gnb .on .txt_join01{border-bottom:1px solid #fff;background-position:-110px -280px}
+		.list_gnb .on .txt_join02{border-bottom:1px solid #fff;background-position:-140px -340px}
+		.list_gnb .on .txt_join03{border-bottom:1px solid #fff;background-position:-120px -320px}
+		.list_gnb .on .txt_join04{border-bottom:1px solid #fff;background-position:-90px -300px}
+
+		/* Common */
+		.emph_g{font-weight:bold}
+		.txt_info{display:inline-block;padding-top:15px;font-size:17px;color:#5c5c5c}
+		.txt_info .link_info{display:inline-block;margin-left:13px;font-size:14px;color:#333;text-decoration:underline}
+		.date_num{display:inline-block;font-size:12px;color:#5c5c5c}
+		.select_info{padding-top:7px;font-size:13px;color:#808080}
+		.txt_sizeinfo{display:block;margin:10px 0;color:#808080}
+			/* Thumb Images file */
+		.thumb_img{display:block;position:relative;border:1px solid #e6e6e6;background-color:#f7f7f7;background-position:50% 50%;background-size:cover}
+		.thumb_img .txt_thumb{position:absolute;top:50%;left:50%;margin:-10px 0 0 -14px;font-size:13px;color:#999;letter-spacing:2px}
+		.thumb_img .img_thumb{display:none;width:100%;height:100%}
+		.thumb_bg{width:500px;height:203px}
+		.thumb_logo{width:98px;height:98px}
+		.thumb_img.on .img_thumb{display:block}
+		.thumb_img.on .txt_thumb{display:none}
+			/* Section Common */
+		.info_detail{position:relative;margin-top:55px}
+		.info_detail + .info_detail{margin-top:47px}
+		.info_detail .btn_output{position:absolute;top:0;right:0;border-color:#000;color:#000}
+			/* Tab Common */
+		.tab_comm .list_tab{overflow:hidden;height:61px}
+		.tab_comm .list_tab li{float:left;width:33.33%}
+		.tab_comm .list_tab .link_tab{display:block;height:59px;padding-left:17px;border-top:1px solid #d9d9d9;border-right:1px solid #d9d9d9;line-height:60px;color:#4c4c4c;background-color:#f7f7f7}
+		.tab_comm .list_tab .link_tab:hover{text-decoration:none}
+		.tab_comm .list_tab li:first-child .link_tab{margin-left:0;border-left:1px solid #d9d9d9}
+		.tab_comm .inner_tab{border-bottom:1px solid #999}
+		.tab_comm .on .link_tab{position:relative;margin:0 -1px;color:#333;border-top:1px solid #999;border-left:1px solid #999;border-right:1px solid #999;font-weight:bold;background-color:#fff}
+		.tab_comm .on .inner_tab{border-bottom:0 none}
+		.tab_comm .list_tab li.on:first-child .link_tab{border-left:1px solid #999}
+			/* Input text Common */
+		.txt_inp{display:block;float:left;position:relative;width:100%;height:35px;background-color:#fff}
+		.txt_inp .inp_txt{display:block;width:100%;height:100%;padding:0 15px;border:1px solid transparent;border-color:#c1c1c1 #c5c5c5 #e5e5e5 #c5c5c5;border-radius:1px;background-color:transparent;color:#666;outline:0 none;line-height:35px;-webkit-box-sizing:border-box;box-sizing:border-box}
+		.txt_inp.on .inp_txt{color:#111}
+			/* Input file Common */
+		.tbl_file{display:block}
+		.tbl_file:after{display:block;clear:both;content:''}
+		.tbl_file .txt_notice{display:inline-block;padding:15px 0 0 10px;font-size:13px;color:#333;vertical-align:top}
+		.file_comm{float:left;position:relative;height:33px;padding-left:10px;border:1px solid transparent;border-color:#c1c1c1 #c5c5c5 #e5e5e5 #c5c5c5;border-radius:1px;line-height:34px;cursor:pointer;color:#e0e0e0;-webkit-box-sizing:border-box;box-sizing:border-box}
+		.file_comm .inp_file{overflow:hidden;position:absolute;left:-9999px;opacity:0.01;filter:alpha(opacity=0)}
+		.file_img{float:left;margin-right:30px}
+		.file_img .file_comm{display:block;float:none;width:98px;height:158px;border:1px solid #e6e6e6;background-color:#f7f7f7}
+		.file_img .btn_inner{display:block;float:none;margin:7px 0 0 0}
+		.file_img .txt_thumb{position:absolute;top:50%;left:50%;margin:-10px 0 0 -14px;font-size:13px;color:#999;letter-spacing:2px}
+		.file_comm.on .img_thumb{position:absolute;top:0;left:0;width:100%;height:100%}
+		.file_comm.on .txt_thumb{display:none}
+		.file_comm .txt_select{position:absolute;top:-1px;right:-62px;z-index:10}
+		.file_img .file_image{position:relative;}
+		.file_image .btn_shop{display:none}
+		.file_image.file_on .btn_shop{display:block}
+		.file_image.file_on .thumb_img .txt_thumb{display:none}
+		.file_image.file_on .thumb_img .img_thumb{display:block}
+		.file_image.file_on .txt_select{display:none}
+		.file_img .file_comm .txt_select{top:inherit;right:inherit;left:-1px;bottom:-42px;margin:0}
+		.file_img .thumb_img{position:absolute;top:0;left:0;width:98px;height:158px}
+			/* Left Table Common */
+		.tit_tbl{font-size:21px;font-weight:normal;letter-spacing:-1px}
+		.tbl_info{width:100%;margin-top:9px;border-top:1px solid #383838;border-bottom:1px solid #383838}
+		.tbl_info th{padding:17px 0 17px 32px;border-bottom:1px solid #ebebeb;font-weight:normal;text-align:left;color:#333;background-color:#f7f7f7}
+		.tbl_info td{padding:15px;border-bottom:1px solid #ebebeb;color:#666}
+		.tbl_info td.type_single{padding-top:13px;padding-bottom:13px}
+		.tbl_info .tit_item{font-size:12px;font-weight:bold;color:#333}
+		.tbl_info .product_img{overflow:hidden}
+		.tbl_info .selec_comm{float:left;margin-left:5px}
+		.tbl_info .selec_comm:first-child {margin-left:0}
+		.tbl_info .select_info{clear:both}
+		.tbl_info .btn_info{margin-left:8px;font-size:13px}
+		.tbl_info .txt_period{float:left;margin:6px 8px 0;color:#666}
+		.tbl_info .wide_type1{width:61%}
+		.tbl_info .wide_type2{width:22.3%}
+			/* Top Table Common */
+		.tbl_report{width:100%;border-top:1px solid #383838;border-bottom:1px solid #383838}
+		.tbl_report th{height:40px;border-bottom:1px solid #ebebeb;font-weight:normal;font-size:13px;color:#333;background-color:#f7f7f7}
+		.tbl_report td{padding:9px 0;border-bottom:1px solid #e1e1e1;font-size:12px;text-align:center}
+		.tbl_report tr:last-child td{border-bottom:0}
+		.tbl_report .link_info{display:block;font-weight:bold;font-size:12px;color:#333;text-decoration:underline}
+		.tbl_report .img_product{display:block;margin:0 auto}
+		.report_type2 td{padding-top:25px;padding-bottom:25px}
+		.report_type2 .align_left{padding:0 30px;text-align:left}
+		.tbl_report .tbl_nodata{padding:88px 0 90px;font-size:15px;color:#1f1f1f}
+			/* Button Common */
+		.btn_info{display:inline-block;height:33px;padding:0 9px;border:1px solid #808080;font-size:14px;line-height:34px;-webkit-box-sizing:border-box;box-sizing:border-box;text-align:center}
+		.btn_inner{float:left;height:33px;padding:0 15px;margin:0 0 0 7px;background-color:#777;color:#fff;line-height:34px;text-align:center}
+		.btn_search{float:right;width:80px;height:37px;margin-top:-1px;font-size:15px;line-height:37px;color:#fff;background-color:#383838}
+		.btn_comm{margin-top:40px;text-align:center}
+		.btn_comm .inner_btn{display:inline-block}
+		.btn_comm .btn_step{float:left;margin-left:10px;width:153px;height:58px;font-size:17px;-webkit-box-sizing:border-box;box-sizing:border-box}
+		.btn_comm .btn_step:first-child{margin-left:0}
+		.btn_comm .btn_cancel{border:1px solid #383838}
+		.btn_comm .btn_drop{border:1px solid #b2b2b2;color:#8c8c8c}
+		.btn_comm .btn_modify{background-color:#383838;color:#fff}
+			/* SelectBox Common */
+		.selec_comm{position:relative;width:35%;background-color:#fff}
+		.selec_comm .link_select{position:relative;display:block;height:35px;padding-left:12px;border-top:1px solid #c1c1c1;border-left:1px solid #c5c5c5;border-right:1px solid #c5c5c5;border-bottom:1px solid #e5e5e5;border-radius:1px;line-height:36px;color:#666;-webkit-box-sizing:border-box;box-sizing:border-box}
+		.selec_comm .link_select:hover{text-decoration:none}
+		.selec_comm .link_select .ico_fold{position:absolute;top:14px;right:15px;width:11px;height:6px;background-position:0 0}
+		.selec_comm .list_selec{display:none;position:absolute;top:35px;left:0;z-index:1;width:100%;border:1px solid transparent;border-color:transparent #d8d8d8 #e5e5e5 #c5c5c5;background-color:#fff;-webkt-box-sizing:border-box;box-sizing:border-box}
+		.selec_comm .list_selec .link_selec{display:block;padding:6px 0 3px 11px;color:#999}
+		.selec_comm .list_selec .link_selec:hover{text-decoration:none}
+		.selec_comm .list_selec .on .link_selec{color:#333;text-decoration:underline}
+		.selec_open .list_selec{display:block}
+		.selec_open .link_select .ico_fold{background-position:-20px 0}
+			/* Textarea Common */
+		.tf_comm{float:left;position:relative;height:64px;border-top:1px solid #c1c1c1;border-left:1px solid #c5c5c5;border-right:1px solid #c5c5c5;border-bottom:1px solid #e5e5e5;border-radius:1px;cursor:text}
+		.tf_comm .tf_txt{display:block;width:100%;height:100%;padding:22px 15px;border:0;font-size:15px;-webkti-box-sizing:border-box;box-sizing:border-box;resize:none}
+		.tf_comm .ex_txt{position:absolute;top:22px;left:16px;font-size:15px;color:#666}
+		.tf_comm.on .ex_txt{display:none}
+		.txt_byte{float:left;margin:17px 0 0 7px;font-size:12px;color:#808080}
+		.txt_byte.byte_type2{margin-top:48px}
+			/* Checkbox Common */
+		.check_inp{position:relative}
+		.check_inp .inp_check{position:absolute;top:50%;left:0;z-index:-1;width:20px;height:20px;margin-top:-11px;opacity:0.01;filter:alpha(opacity=0)}
+		.check_inp .lab_check{display:inline-block;position:relative;padding-left:25px;cursor:pointer;vertical-align:top}
+		.check_inp .ico_check{position:absolute;top:0;left:0;width:20px;height:20px;background-position:-20px -20px}
+		.check_inp.on .ico_comm{background-position:0 -20px}
+			/* Radio Common */
+		.radio_inp{position:relative}
+		.radio_inp .inp_radio{position:absolute;top:50%;left:0;z-index:-1;width:19px;height:19px;margin-top:-10px;opacity:0.01;filter:alpha(opacity=0)}
+		.radio_inp .lab_radio{position:relative;display:inline-block;padding-left:25px;cursor:pointer}
+		.radio_inp .ico_radio{position:absolute;top:0;left:0;width:19px;height:19px;background-position:-20px -40px}
+		.radio_inp .lab_radio.on .ico_comm{background-position:0 -40px}
+			/* layer popup Common */
+		.dimmed_layer{display:none;position:absolute;left:0;top:0;width:100%;height:100%;background-color:#000;opacity:0.6;filter:alpha(opacity=1)}
+		.admin_layer{display:none;position:absolute;top:50%;left:50%;margin-left:-232px}
+		.admin_layer .inner_admin_layer{position:relative;width:465px}
+		.admin_layer .layer_head{padding:17px 0 15px 23px;background-color:#343434}
+		.admin_layer .layer_head .txt_comm{width:190px;height:20px;margin:5px 0;background-position:0 -30px}
+		.admin_layer .layer_head .tit_layer{font-size:20px;color:#fff;letter-spacing:-1px}
+		.admin_layer .layer_body{padding:0 25px 48px;background-color:#fff;text-align:center}
+		.admin_layer .layer_body .txt_admin{display:table;width:100%;min-height:60px;padding:41px 0 38px;font-size:17px;line-height:30px;color:#333;letter-spacing:-1px}
+		.admin_layer .layer_body .txt_admin .inner_txt{display:table-cell;vertical-align:middle}
+		.admin_layer .layer_body .txt_admin .info_num{display:block;font-size:14px;color:#666}
+		.admin_layer .layer_body .btn_comm{margin:0;padding-top:20px;border-top:1px solid #dedede}
+		.admin_layer .layer_body .btn_comm .btn_step{width:120px;height:40px;font-size:15px}
+		.admin_layer .btn_close{position:absolute;top:0;right:0;padding:23px}
+		.admin_layer .btn_close .ico_close{width:16px;height:16px;background-position:0 -60px}
+		.layer_on{overflow:hidden}
+		.layer_on .admin_layer{display:block}
+		.layer_on .dimmed_layer{display:block}
+		.admin_layer .inner_admin_type2{width:700px}
+		.inner_admin_type2 .txt_edit{padding:19px 0 20px;font-size:14px;color:#4c4c4c;text-align:center}
+		.inner_admin_type2 .photo_edit{width:600px;height:600px;margin:0 auto;background-color:#efefef}
+		.inner_admin_type2 .layer_body .btn_comm{border-top:0 none;height:41px;padding-top:20px}
+		.admin_layer .inner_admin_type3{width:700px}
+		.inner_admin_type3 .layer_body{padding:0}
+		.admin_layer .inner_admin_type4{width:700px}
+		.inner_admin_type4 .layer_body{padding:50px 65px;font-size:17px;letter-spacing:-0.5px}
+		.inner_admin_type4 .txt_edit{line-height:27px;padding-bottom:23px}
+		.inner_admin_type4 .info_browser{overflow:hidden;width:530px;height:127px;margin:0 auto;padding:24px 0;border-radius:5px;background-color:#f7f7f7;text-align:center}
+		.inner_admin_type4 .inner_browser{display:inline-block}
+		.inner_admin_type4 .link_browser{float:left;width:118px;height:125px;padding:0 35px;border-left:1px dashed #dcdcdc;font-size:13px;text-decoration:underline}
+		.inner_admin_type4 .link_browser:first-child{border-left:0 none}
+		.inner_admin_type4 .link_browser .ico_info{display:block;position:static;top:0;left:0;width:86px;height:86px;margin:0 auto 11px}
+		.inner_admin_type4 .ico_chrome{background-position:-130px 0}
+		.inner_admin_type4 .ico_ie{width:85px;height:83px;background-position:-130px -90px}
+		.tbl_hashtag{width:100%}
+		.tbl_hashtag th{min-height:75px;padding:27px 30px;border-bottom:1px solid #e1e1e1;background-color:#f7f7f7;text-align:left}
+		.tbl_hashtag td{min-height:75px;padding:18px 13px 20px;border-bottom:1px solid #e1e1e1;text-align:left}
+		.tbl_hashtag .link_hashtag{display:inline-block;color:#333;font-weight:bold;text-decoration:underline}
+
+			/* Paging Common */
+		.paging_comm{padding-top:30px;text-align:center}
+		.paging_comm .inner_paging{display:inline-block;overflow:hidden}
+		.paging_comm .link_page{float:left;width:26px;height:26px;margin-left:5px;border:1px solid #e6e6e6;font-size:12px;color:#333;line-height:27px;text-align:center}
+		.paging_comm .link_page.on{background-color:#333;border:1px solid #333;color:#fff}
+		.paging_comm .link_page:hover{text-decoration:none}
+		.paging_comm .link_page .ico_comm{display:inline-block;height:7px;margin-top:9px;vertical-align:top}
+		.paging_comm .link_next{margin-left:10px}
+		.paging_comm .link_next .ico_comm{width:4px;background-position:-20px -10px}
+		.paging_comm .link_last .ico_comm{width:8px;background-position:-30px -10px}
+		.paging_comm .link_prev{margin-right:5px}
+		.paging_comm .link_prev .ico_comm{width:4px;background-position:-10px -10px}
+		.paging_comm .link_first .ico_comm{width:8px;background-position:0 -10px}
+			/* Suggest Common */
+		.suggest_comm .box_search{position:relative;float:left;width:61%}
+		.suggest_comm .tf_keyword{display:block;width:100%;height:35px;padding:0 15px;border:1px solid transparent;border-color:#c1c1c1 #c5c5c5 #e5e5e5 #c5c5c5;border-radius:1px;background-color:transparent;color:#666;outline:0 none;line-height:35px;-webkit-box-sizing:border-box;box-sizing:border-box}
+		.suggest_comm .suggest_keyword{display:none;position:absolute;top:34px;left:0;width:100%}
+		.suggest_comm .list_suggest{border:1px solid transparent;border-color:#e5e5e5 #d8d8d8 #e5e5e5 #c5c5c5;background-color:#fff}
+		.suggest_comm .list_suggest .link_sgt{display:block;padding:6px 0 3px 11px;color:#999}
+		.suggest_comm .list_suggest .link_sgt:hover{text-decoration:none}
+		.suggest_comm .write_on .suggest_keyword{display:block}
+		.hashtag_keyword{float:left;width:61%;margin-top:22px}
+		.hashtag_keyword .link_keyword{float:left;padding:8px 10px 6px;margin:0 5px 10px 0;border:1px solid #e6e6e6;font-size:13px;color:#666}
+		.hashtag_keyword .link_keyword .ico_del{display:inline-block;width:15px;height:15px;margin:1px 0 0 10px;background-position:-20px -60px;vertical-align:top}
+
+		/* Content */
+		.cont_home .tit_inquiry{width:250px;background-position:0 0}
+		.cont_brand .tit_shopprof{width:210px;background-position:0 -40px}
+		.cont_brand .tit_product{width:290px;background-position:0 -80px}
+		.cont_brand .tit_news{width:275px;background-position:0 -120px}
+		.cont_brand .tit_coupon{width:137px;background-position:0 -200px}
+		.cont_brand .btn_request{height:26px;line-height:26px;margin-left:9px}
+		.cont_brand .txt_shop{margin-top:13px;font-size:13px;color:#333}
+		.cont_notice .tit_notice{width: 207px;background-position:0 -240px}
+		.cont_notice .tit_faq{width:74px;background-position:0 -280px}
+			/* 탭, 검색 */
+		.tab_product{margin-top:60px}
+		.detail_code{height:37px;margin-top:50px;padding:24px;border:1px solid #e6e6e6;background-color:#f7f7f7}
+		.detail_code .code_section{float:left;margin-right:20px}
+		.detail_code .code_section .txt_inp{width:238px}
+		.detail_code .code_section .inp_date{width:129px}
+		.detail_code .txt_bar{float:left;height:35px;margin:0 4px 0 8px;font-size:15px;line-height:35px;color:#666}
+		.detail_code .selec_comm{float:left;width:130px}
+		.detail_code .txt_inp{margin-left:4px}
+
+		.head_sort{height:35px;padding:50px 0 12px}
+		.head_sort .sort_drop .selec_comm{width:130px}
+		.sort_exposed{float:left;margin-right:25px}
+		.sort_exposed .btn_inner{min-width:72px;margin:0 0 0 7px}
+		.sort_exposed .btn_inner:first-child{margin:0}
+		.sort_exposed .btn_info{min-width:72px}
+		.sort_exposed .selec_comm{float:left;margin-right:4px}
+		.sort_exposed .txt_inp{margin-right:10px}
+		.sort_exposed .btn_search{float:left}
+		.sort_exposed .link_control{float:left;width:26px;height:26px;margin-right:5px;border:1px solid #808080;font-size:12px;color:#333;line-height:27px;text-align:center}
+		.sort_exposed .link_control .ico_comm{display:inline-block;width:7px;margin-top:9px;vertical-align:top}
+		.sort_exposed .control_first .ico_comm{height:8px;background-position:0 -80px}
+		.sort_exposed .control_prev .ico_comm{height:4px;margin-top:11px;background-position:-10px -80px}
+		.sort_exposed .control_next .ico_comm{height:4px;margin-top:11px;background-position:-20px -80px}
+		.sort_exposed .control_last .ico_comm{height:8px;background-position:-30px -80px}
+		.sort_drop{float:right}
+		.sort_drop .selec_comm{float:left;margin-left:7px}
+
+		.tbl_info td.td_hopedate .selec_comm{width:15%}
+		.tbl_info td.td_news .tf_comm{height:400px}
+		.tbl_info td.td_upload .file_comm{width:30%}
+		.tbl_info td.td_upload .btn_info{float:none;margin:10px 0 5px}
+		.tbl_info td.td_period .txt_inp{width:184px}
+		.tbl_info td.td_category .list_selec{top:63px}
+		.tbl_info td.td_category .selec_comm{width:254px;margin-left:9px}
+		.tbl_info td.td_category .selec_comm:first-child{margin-left:0}
+		.tbl_info td.td_category .selec_comm .link_select{margin-top:7px}
+		.tbl_report td.td_register .btn_inner{float:none;margin:0}
+
+		/* 노출상품관리 */
+		.fake_scroll{overflow:hidden;position:relative}
+		.fake_scroll .scroll{position:absolute;right:5px;top:0;width:8px;margin:16px 0;border-radius:15px;background-color:#a9a8a8;cursor:pointer}
+		.wrap_exposed{overflow:hidden;position:relative;min-width:1100px;padding-top:50px}
+		.split_product{float:left;position:relative;width:45.5%;min-height:1074px;margin-left:8.8%}
+		.split_product.fst{margin-left:0}
+		.split_product .txt_inform{line-height:19px;color:#5c5c5c}
+		.split_product .head_sort{padding-top:45px}
+		.split_product .sort_exposed{margin-right:0}
+		.split_product .sort_exposed .selec_comm{width:130px}
+		.split_product .sort_drop .selec_comm{width:110px;margin-left:0}
+		.split_product .sort_exposed .txt_inp{max-width:165px}
+		.split_product .txt_total{position:absolute;bottom:0;left:0;right:0;color:#333;text-align:center}
+		.split_product .txt_total .emph_g{font-weight:bold}
+		.split_product .paging_comm{clear:both}
+
+		.box_board{float:left;width:100%;border:1px solid #e1e1e1}
+		.box_board .head_board{overflow:hidden;border-bottom:1px solid #e1e1e1;background-color:#f7f7f7}
+		.box_board .head_board .tit_board{float:left;width:20%;height:40px;font-size:13px;line-height:40px;color:#333;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box}
+		.box_board .list_board{overflow:hidden;height:818px}
+		.box_board .list_board .txt_nodata{padding:88px 0 90px;font-size:15px;color:#1f1f1f}
+		.box_board .list_board li{overflow:hidden;text-align:center;border-top:1px solid #e1e1e1}
+		.box_board .list_board li:first-child{border-top:0 none}
+		.box_board .list_board .cell_txt{display:table;float:left;height:106px;padding:5px 0;font-size:12px;text-align:center}
+		.box_board .list_board .cell_txt .inner_cell{display:table-cell;vertical-align:middle}
+		.box_board .list_board .cell_txt .img_product{display:block;margin:0 auto}
+		.box_board .head_board .tit_choice, .box_board .list_board .cell_choice{width:9.2%}
+		.box_board .head_board .tit_choice{padding-top:10px}
+		.box_board .head_board .tit_product, .box_board .list_board .cell_product{width:30%}
+		.box_board .head_board .tit_image, .box_board .list_board .cell_image{width:19.4%}
+		.box_board .head_board .tit_code, .box_board .list_board .cell_code{width:19.1%}
+		.box_board .head_board .tit_like, .box_board .list_board .cell_like{width:21.7%}
+		.box_board .list_board .link_info{display:block;font-weight:bold;font-size:12px;color:#333;text-decoration:underline}
+		.bridge_btn{position:absolute;top:368px;left:50%;margin-left:-33px}
+		.bridge_btn .btn_inner{display:block;float:none;width:66px;margin:0 0 10px;text-align:left}
+		.bridge_btn .btn_inner .ico_comm{float:right;width:6px;height:11px;margin-top:9px;background-position:-10px -90px}
+		.bridge_btn .btn_info{display:block;width:66px;text-align:right}
+		.bridge_btn .btn_info .ico_comm{float:left;width:6px;height:11px;margin-top:9px;background-position:0 -90px}
+
+		.tbl_info .item_pack{display:block;padding-top:9px}
+		.tbl_info .item_pack .check_inp .lab_check{padding-left:28px}
+		.tbl_info .item_pack .txt_inp{float:none;width:218px;margin:5px 0 5px 30px}
+		.tbl_info .item_pack .lab_check .txt_inp{display:inline-block;width:160px;margin:0 3px 0}
+		.tbl_info .item_pack.pack_type2{height:35px}
+		.tbl_info .item_pack.pack_type2 .check_inp .ico_check{top:6px}
+		.tbl_info .item_pack.pack_type2 .txt_byte{float:none}
+		.tbl_info .item_coupon{float:left;overflow:hidden;width:240px}
+		.tbl_info .item_coupon .txt_inp{display:inline-block;float:none;width:184px;margin-top:10px}
+		.radio_template{display:inline-block;width:86px}
+		.radio_template .ico_template, .radio_template .lab_radio.on .ico_template{width:17px;height:14px;margin:3px 0 0 4px}
+		.radio_template .ico_template1, .radio_template .lab_radio.on .ico_template1{background-position:-20px -90px}
+		.radio_template .lab_radio .ico_template2, .radio_template .lab_radio.on .ico_template2{background-position:0 -110px}
+		.radio_template .lab_radio .ico_template3, .radio_template .lab_radio.on .ico_template3{background-position:-20px -110px}
+
+		/* 공지문의 */
+		.tit_question{display:block;margin:32px 0 8px;padding:5px 0;border-bottom:1px solid #e0e0e0;font-weight:normal;font-size:21px;color:#000}
+		.tit_question.fst{margin-top:41px}
+		.tit_ask{display:block;padding:19px 20px 0;font-weight:bold;font-size:18px;color:#000}
+		.txt_answer{overflow:hidden;margin:0 20px;padding:11px 0 0 20px;line-height:24px;color:#595959;text-indent:-20px}
+		.txt_answer .ico_comm{display:inline-block;width:10px;height:10px;margin:2px 5px 0;background-position:0 -130px;vertical-align:top;text-indent:-20px}
+
+		.notice_info{overflow:hidden;height:33px;margin-top:70px;padding:13px 0 13px 20px;border-top:1px solid #999;border-bottom:1px solid #e1e1e1;background-color:#f7f7f7}
+		.notice_info .tit_info{float:left;font-weight:normal;font-size:18px;line-height:36px;color:#000;vertical-align:top}
+		.cont_notice .pack_btn{float:right;padding-right:20px}
+		.cont_notice .pack_btn .btn_info{float:left;width:54px;margin:0 0 0 6px;text-decoration:none}
+		.cont_notice .pack_btn .btn_inner{width:56px;padding:0;margin:0 0 0 6px;text-decoration:none}         
+		.desc_notice{padding:20px 20px 60px;font-size:13px;line-height:30px;color:#333}
+
+		.list_notipath{overflow:hidden;margin-bottom:15px;;border-bottom:1px solid #999}
+		.list_notipath li{overflow:hidden;height:50px;border-top:1px solid #e1e1e1}
+		.list_notipath .cell_path{float:left;font-size:13px;line-height:50px;;color:#333;text-align:center}
+		.list_notipath .cell_locate{width:9.1%}
+		.list_notipath .cell_info{width:49.8%;padding:0 30px;-webkit-box-sizing:border-box;box-sizing:border-box;text-align:left}
+		.list_notipath .cell_info a.link_info:hover{font-weight:bold}
+		.list_notipath .cell_writer{width:13.7%}
+		.list_notipath .cell_date{width:13.7%}
+		.list_notipath .cell_view{width:13.7%}
+
+		/* 가입 */
+		.cont_join #kakaoContent{padding-top:70px}
+		.info_join{position:relative;width:700px;margin:83px auto 0;padding:85px 70px 80px;background-color:#fafafa;text-align:center}
+		.info_join .tit_join{display:inline-block;margin-bottom:15px;font-size:40px;letter-spacing:-1px}
+		.info_join .tit_join .txt_joininfo{font-weight:normal}
+		.info_join .txt_join{font-size:17px;color:#4c4c4c;word-spacing:-1px}
+		.info_join .keep_info{overflow-y:auto;height:70px;padding:20px 15px;margin-top:25px;font-size:14px;background-color:#fff;text-align:left;color:#666}
+		.info_join .ico_join01{background-position:0 0}
+		.info_join .ico_join02{background-position:0 -120px}
+		.tit_provision{display:block;padding-bottom:10px;font-weight:normal;font-size:21px}
+		.use_provision{height:479px;padding:10px 0;margin-bottom:19px;border-top:1px solid #343434;border-bottom:1px solid #343434;color:#666}
+		.use_provision .txt_provision{overflow-y:auto;display:block;width:100%;height:100%;padding:23px 21px;border:1px solid transparent;border-color:#c1c1c1 #d8d8d8 #e5e5e5 #c5c5c5;-wekbit-box-sizing:border-box;box-sizing:border-box}
+
+		/* 달력 */
+		#kakaoWrap .flatpickr-day.selected,
+		#kakaoWrap .flatpickr-day.startRange,
+		#kakaoWrap .flatpickr-day.endRange,
+		#kakaoWrap .flatpickr-day.selected:focus,
+		#kakaoWrap .flatpickr-day.startRange:focus,
+		#kakaoWrap .flatpickr-day.endRange:focus,
+		#kakaoWrap .flatpickr-day.selected:hover,
+		#kakaoWrap .flatpickr-day.startRange:hover,
+		#kakaoWrap .flatpickr-day.endRange:hover,
+		#kakaoWrap .flatpickr-day.selected.prevMonthDay,
+		#kakaoWrap .flatpickr-day.startRange.prevMonthDay,
+		#kakaoWrap .flatpickr-day.endRange.prevMonthDay,
+		#kakaoWrap .flatpickr-day.selected.nextMonthDay,
+		#kakaoWrap .flatpickr-day.startRange.nextMonthDay,
+		#kakaoWrap .flatpickr-day.endRange.nextMonthDay{background-color:#333;border-color:#333}
+		#kakaoWrap .flatpickr-day.today{border-color:#333}
+	</style>
+</head>
+<body>
+<div id="kakaoIndex">
+  <a href="#kakaoBody">본문 바로가기</a>
+  <a href="#kakaoGnb">메뉴 바로가기</a>
+</div>
+
+<div id="kakaoWrap" class="cont_brand"> 	
+<div id="kakaoHead" class="kakaostyle_head">
+	<div class="inner_head">
+		<h1 class="tit_logo"><a href="#none" class="link_logo"><span class="txt_comm txt_logo">Kakostyle 파트너어드민</span></a></h1>
+		<div id="kakakoGnb" class="admin_gnb">
+	<h2 id="#kakaoBody" class="screen_out">Kakaostyle 파트너어드민 메인메뉴</h2>
+	<ul class="list_gnb">
+		<li class="gnb_home ">
+			<a href="#none" class="link_gnb"><span class="txt_comm txt_home">광고주 홈</span></a>
+			<div class="gnb_sub">
+				<ul class="inner_gnb_sub">
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_main">메인</span></a></li>
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_inquiry">정보조회</span></a></li>
+				</ul>
+			</div>
+		</li>
+		<li class="gnb_hotitem ">
+			<a href="#none" class="link_gnb"><span class="txt_comm txt_hotitem">핫아이템 관리</span></a>
+			<div class="gnb_sub">
+				<ul class="inner_gnb_sub">
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_account">구좌조회</span></a></li>
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_matter">소재관리</span></a></li>
+				</ul>
+			</div>
+		</li>
+		<li class="gnb_brand on">
+			<a href="#none" class="link_gnb"><span class="txt_comm txt_brand">브랜드샵 관리</span></a>
+			<div class="gnb_sub">
+				<ul class="inner_gnb_sub">
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_shopprof">샵프로필</span></a></li>
+					<li class="sub_on"><a href="#none" class="link_sub"><span class="txt_comm txt_product">상품</span></a></li>
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_news">뉴스</span></a></li>
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_coupon">쿠폰</span></a></li>
+				</ul>
+			</div>
+		</li>
+		<li class="gnb_stats ">
+			<a href="#none" class="link_gnb"><span class="txt_comm txt_stats">통계관리</span></a>
+			<div class="gnb_sub">
+				<ul class="inner_gnb_sub">
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_hot">핫아이템</span></a></li>
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_brandshop">브랜드샵</span></a></li>
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_change">전환리포트</span></a></li>
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_top">TOP10</span></a></li>
+				</ul>
+			</div>
+		</li>
+		<li class="gnb_contract ">
+			<a href="#none" class="link_gnb"><span class="txt_comm txt_contract">계약관리</span></a>
+		</li>
+		<li class="gnb_noti ">
+			<a href="#none" class="link_gnb"><span class="txt_comm txt_noti">공지/문의</span></a>
+			<div class="gnb_sub">
+				<ul class="inner_gnb_sub">
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_notice">공지사항</span></a></li>
+					<li><a href="#none" class="link_sub"><span class="txt_comm txt_fqa">FAQ</span></a></li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</div>
+<!-- // gnb -->		<div class="user_profile">
+			<h2 class="screen_out">내 정보</h2>
+			<div class="info_profile">
+				<a href="#none" class="link_profile"><span class="txt_user">카카오스타일</span>님</a>
+				<a href="#none" class="link_logout">logout</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- // kakaostyleHead -->
+	
+	<hr class="hide">
+
+	<div id="kakaoContent">
+		<h2 id="#kakaoBody" class="screen_out">브랜드샵관리</h2>
+		<div id="cMain">
+			<div id="mArticle">
+				<h2 class="tit_comm tit_product">브랜드샵 상품현황</h2>
+<p class="txt_info">브랜드샵의 상품등록/수정은 운영자의 검수후 반영됩니다. (단, 삭제는 검수 없음)</p>
+<form>
+	<fieldset>
+		<legend class="screen_out">브랜드샵 상품현황</legend>
+		<div class="tab_comm tab_product">
+			<strong class="screen_out">탭 제목</strong>
+			<ul class="list_tab">
+				<li>
+					<div class="inner_tab">
+						<a href="#none" class="link_tab">
+							등록상품 (67)
+						</a>
+					</div>
+				</li>
+				<li class="on"> <!-- 활성화시 : on 클래스 부여 -->
+					<div class="inner_tab">
+						<a href="#none" class="link_tab">
+							노출상품 (67)
+						</a>
+					</div>
+				</li>
+				<li>
+					<div class="inner_tab">
+						<a href="#none" class="link_tab">
+							미등록상품 (67)
+						</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="wrap_exposed">
+			<div class="split_product fst">
+				<h3 class="tit_tbl">일반노출 상품</h3>
+				<p class="txt_inform">브랜드샵 상단에 보여주고 싶은 상품들을  선택하여 우선 노출 상품에 추가해주세요.<br> 일반 노출 상품은 우선  노출 상품이 모두 노출 된 후 최근 등록순으로 보여집니다.</p>
+				<div class="head_sort">
+					<div class="sort_exposed">
+						<div class="selec_comm"> <!-- Select Box open : selec_open 클래스 부여 -->
+							<a href="#none" class="link_select">상품코드<span class="ico_comm ico_fold">펼치기/접기</span></a>
+							<ul class="list_selec">
+								<li class="on"><a href="#none" class="link_selec">선택하세요</a></li> <!-- 선택 시 : on 클래스 부여 -->
+								<li><a href="#none" class="link_selec">선택하세요</a></li>
+								<li><a href="#none" class="link_selec">선택하세요</a></li>
+								<li><a href="#none" class="link_selec">선택하세요</a></li>
+							</ul>
+						</div>
+						<span class="txt_inp">
+							<!-- 텍스트 입력 시 : on 클래스 부여 -->
+							<input type="text" class="inp_txt" data-holder="입력하세요" value="" title="상품코드">
+						</span>
+						<button type="button" class="btn_search">검색</button>
+					</div>
+					<div class="sort_drop">
+						<div class="selec_comm"> <!-- Select Box open : selec_open 클래스 부여 -->
+							<a href="#none" class="link_select">등록일<span class="ico_comm ico_fold">펼치기/접기</span></a>
+							<ul class="list_selec">
+								<li class="on"><a href="#none" class="link_selec">선택하세요</a></li> <!-- 선택 시 : on 클래스 부여 -->
+								<li><a href="#none" class="link_selec">선택하세요</a></li>
+								<li><a href="#none" class="link_selec">선택하세요</a></li>
+								<li><a href="#none" class="link_selec">선택하세요</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="box_board">
+					<strong class="screen_out">상품현황 목록</strong>
+					<div class="head_board">
+						<span class="tit_board tit_choice">
+							<div class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+								<input type="checkbox" name="inpCheckSetAll" id="checkAll1" class="inp_check">
+								<label for="checkAll1" class="lab_check">
+									<span class="ico_comm ico_check">선택</span>
+								</label>
+							</div>
+						</span>
+						<span class="tit_board tit_product">상품명</span>
+						<span class="tit_board tit_image">이미지</span>
+						<span class="tit_board tit_code">상품코드</span>
+						<span class="tit_board tit_like">좋아요</span>
+					</div>
+					<div class="fake_scroll">
+						<ul class="list_board">
+																							<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet1" id="inpCheck1" class="inp_check">
+												<label for="inpCheck1" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet1" id="inpCheck2" class="inp_check">
+												<label for="inpCheck2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet1" id="inpCheck3" class="inp_check">
+												<label for="inpCheck3" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet1" id="inpCheck4" class="inp_check">
+												<label for="inpCheck4" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet1" id="inpCheck5" class="inp_check">
+												<label for="inpCheck5" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet1" id="inpCheck6" class="inp_check">
+												<label for="inpCheck6" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet1" id="inpCheck7" class="inp_check">
+												<label for="inpCheck7" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS) <br>레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																					</ul>
+						<div class="scroll" style="height:190px"></div> <!-- 임시스타일. 리스트증가에 따라 스크롤 높이값 변경  -->
+					</div>
+				</div>
+								<div class="paging_comm">
+					<div class="inner_paging">
+						<span class="screen_out">이전페이지 없음</span> <!-- 이전페이지 없을 경우, 대체텍스트 추가 -->
+						<a href="#none" class="link_page on">1<span class="screen_out">현재페이지</span></a> <!-- 활성화 페이지 : on 클래스 부여 / 대체텍스트 추가 -->
+						<a href="#none" class="link_page">2</a>
+						<a href="#none" class="link_page link_next"><span class="ico_comm">다음</span></a>
+						<a href="#none" class="link_page link_last"><span class="ico_comm">끝페이지 이동</span></a>
+					</div>
+				</div>
+							</div>
+			<div class="bridge_btn">
+				<span class="screen_out">우선노출상품 리스트</span><button type="button" class="btn_inner">추가<span class="ico_comm"></span></button>
+				<span class="screen_out">우선노출상품 리스트</span><button type="button" class="btn_info"><span class="ico_comm"></span>해제</button>
+			</div>
+			<div class="split_product">
+				<h3 class="tit_tbl">우선노출 상품</h3>
+				<p class="txt_inform">최대 150개까지 우선 노출 상품으로 지정할 수 있습니다.<br>일반 노출 상품으로 변경하려면 상품을 선택하여 해제 버튼을 누르세요.</p>
+				<div class="head_sort">
+					<div class="sort_exposed">
+						<span class="screen_out">상품노출순서</span>
+						<a href="#none" class="link_control control_first"><span class="ico_comm">처음으로</span></a>
+						<a href="#none" class="link_control control_prev"><span class="ico_comm">이전</span></a>
+						<a href="#none" class="link_control control_next"><span class="ico_comm">다음</span></a>
+						<a href="#none" class="link_control control_last"><span class="ico_comm">끝으로</span></a>
+					</div>
+				</div>
+				<div class="box_board">
+					<strong class="screen_out">상품현황 목록</strong>
+					<div class="head_board">
+						<span class="tit_board tit_choice">
+							<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+								<input type="checkbox" name="inpCheckSetAll" id="checkAll2" class="inp_check">
+								<label for="checkAll2" class="lab_check">
+									<span class="ico_comm ico_check">선택</span>
+								</label>
+							</span>
+						</span>
+						<span class="tit_board tit_product">상품명</span>
+						<span class="tit_board tit_image">이미지</span>
+						<span class="tit_board tit_code">상품코드</span>
+						<span class="tit_board tit_like">좋아요</span>
+					</div>
+					<div class="fake_scroll">
+						<ul class="list_board">
+																						<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet2" id="inpCheck1_2" class="inp_check">
+												<label for="inpCheck1_2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet2" id="inpCheck2_2" class="inp_check">
+												<label for="inpCheck2_2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet2" id="inpCheck3_2" class="inp_check">
+												<label for="inpCheck3_2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet2" id="inpCheck4_2" class="inp_check">
+												<label for="inpCheck4_2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet2" id="inpCheck5_2" class="inp_check">
+												<label for="inpCheck5_2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet2" id="inpCheck6_2" class="inp_check">
+												<label for="inpCheck6_2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet2" id="inpCheck7_2" class="inp_check">
+												<label for="inpCheck7_2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet2" id="inpCheck8_2" class="inp_check">
+												<label for="inpCheck8_2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet2" id="inpCheck9_2" class="inp_check">
+												<label for="inpCheck9_2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																<li>
+									<div class="cell_txt cell_choice">
+										<div class="inner_cell">
+											<span class="check_inp"> <!-- 활성화 시 : on클래스 부여 -->
+												<input type="checkbox" name="inpCheckSet2" id="inpCheck10_2" class="inp_check">
+												<label for="inpCheck10_2" class="lab_check">
+													<span class="ico_comm ico_check">선택</span>
+												</label>
+											</span>
+										</div>
+									</div>
+									<div class="cell_txt cell_product"><div class="inner_cell"><a href="#none" class="link_info">레드링(귀욤체크멜빵OPS)</a></div></div>
+									<div class="cell_txt cell_image"><div class="inner_cell"><img src="http://icon.daumcdn.net/w/icon/1612/15/170625970.jpg" width="60" height="96" alt="" class="img_product"></div></div>
+									<div class="cell_txt cell_code"><div class="inner_cell">WOPP000CSDN</div></div>
+									<div class="cell_txt cell_like"><div class="inner_cell">10</div></div>
+								</li>
+																					</ul>
+						<div class="scroll" style="height:100px"></div> <!-- 임시스타일. 리스트증가에 따라 스크롤 높이값 변경  -->
+					</div>
+				</div>
+								<div class="txt_total">
+					<span class="screen_out">선택된상품</span><em class="emph_g">10</em><span class="screen_out">총상품</span>/ 150
+				</div>
+							</div>
+		</div>
+		<div class="btn_comm">
+			<div class="inner_btn">
+				<button type="button" class="btn_step btn_cancel">취소</button>
+				<button type="submit" class="btn_step btn_modify">수정</button>
+			</div>
+		</div>
+	</fieldset>
+</form>
+			</div>
+		</div>
+	</div>
+	<!-- // kakaostyleContent -->
+	<hr class="hide">
+
+	<div id="kakaoFoot" class="kakaostyle_foot">
+	<h2 class="screen_out">서비스 이용정보</h2>
+ 	<small class="info_copyright">© 2016 kakaostyle marketing center, Inc. All rights reserved.</small>
+</div>
+	<!-- // kakaostyleteFoot -->
+</div>
+	<script type="text/javascript">
+		$('.head_board .ico_check').on('click', function() {
+			if( $(this).parents('.check_inp').hasClass('on') ){
+				$(this).parents('.check_inp').removeClass('on');
+				$(this).parents('.box_board').find('.list_board .check_inp').removeClass('on');
+			}else{
+				$(this).parents('.check_inp').addClass('on');
+				$(this).parents('.box_board').find('.list_board .check_inp').addClass('on');
+			}
+		});
+		$('.list_board .ico_check').on('click', function() {
+			if( $(this).parents('.check_inp').hasClass('on') ){
+				$(this).parents('.check_inp').removeClass('on');
+			}else{
+				$(this).parents('.check_inp').addClass('on');
+			}
+		});
+	</script>
+</body>
+</html>
