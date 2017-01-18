@@ -5,13 +5,60 @@
   <title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
 </head>
+<style>
+img {
+  display: none;
+  width: 300px;
+  height: 300px;
+}
+</style>
 <body>
   <div>
-    
+    <button class="left">왼쪽</button>
+    <button class="right">오른쪽</button>
+    <!-- 결과 div.. -->
+    <div id="result">
+      <img class="image" src="http://goodmomusic.net/wp-content/uploads/2016/06/aoa-goodluckjp-3-1.jpg" alt="image1" />
+      <img class="image" src="http://mimgnews1.naver.net/image/star/2017/01/10/dc1f2309.b5810624.jpg" alt="image2" />
+      <img class="image" src="http://cdn.koreaboo.com/wp-content/uploads/2015/02/aoa.jpg" alt="image3" />
+    </div>
   </div>
 
   <script>
+  var index = 0;
+  var temp = document.getElementsByClassName('image');
+
+  function changePicture() {
+    for(var i = 0; i < temp.length; i++) {
+      if(index == i) {
+        $(temp[i]).css('display', 'block');
+      }else {
+        $(temp[i]).css('display', 'none');
+      }
+    }
+  }
+
+  $('.right').on('click', function() {
+    if(index < temp.length - 1) {
+      index++;
+    }else {
+      index = 0;
+    }
+
+    changePicture();
+  });
+
+  $('.left').on('click', function() {
+    if(index > 0) {
+      index--;
+    }else {
+      index = temp.length - 1;
+    }
+
+    changePicture();
+  });
   </script>
 </body>
 </html>
