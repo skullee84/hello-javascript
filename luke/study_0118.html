@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{display : none;
+            width : 400px;
+            height : 600px}
+    </style>
+</head>
+<body>
+    <div>
+        <button id="prevBtn">PREV</button>
+        <button id="nextBtn">NEXT</button>
+        <div id="container"></div>
+        <img class="image" src="http://potsu.net/files/attach/images/320837/709/767/004/9715ef14ff3277b80fe19c5e3c25c048.jpg" alt="nara"/>
+        <img class="image" src="https://www.sktform.co.kr/wp-content/uploads/2016/07/POC_160623-nara-wallpaper.jpg" alt="nara"/>
+        <img class="image" src="http://cfile29.uf.tistory.com/image/220D6B485780E8430A5305" alt="nara"/>
+    </div>
+
+    <script>
+        window.onload = function() {
+            var index = 0;
+            var container = document.getElementById('container');
+            var nextBtn = document.getElementById('nextBtn');
+            var prevBtn = document.getElementById('prevBtn');
+            var imageArr = document.getElementsByClassName('image');
+
+            nextBtn.onclick = clickHandler;
+            prevBtn.onclick = clickHandler;
+
+            function clickHandler(e) {
+                if(e.target.id === 'nextBtn') {
+                    if(index + 1 <= imageArr.length - 1) {
+                        index++;
+                    } else {
+                        index = 0;
+                    }
+                } else {
+                    if(index - 1 >= 0) {
+                        index--;
+                    } else {
+                        index = 2;
+                    }
+
+                }
+                updatePicture();
+            }
+
+            function updatePicture() {
+                for(var i=0; i<imageArr.length; i++) {
+                    if(i == index) {
+                        imageArr[i].style.display = "block";
+                    } else {
+                        imageArr[i].style.display = "none";
+                    }
+                }
+            }
+            updatePicture();
+        }
+    </script>
+</body>
+</html>
