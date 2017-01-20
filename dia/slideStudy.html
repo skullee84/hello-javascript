@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+  <style>
+  img{display:none;width:300px;height:400px;}
+  </style>
+</head>
+<body>
+	<div>
+		<button class="left">왼쪽</button>
+		<button class="right">오른쪽</button>
+		<div id="result">
+			<img class="img" src="http://thestar.chosun.com/site/data/img_dir/2015/06/26/2015062600719_0.jpg" style="display:block"/>
+			<img class="img" src="https://ncache.ilbe.com/files/attach/new/20160802/5385449/8124042436/8527736416/26de7140502a4b95e490964aa0af69e0.jpg" />
+			<img class="img" src="http://image.chosun.com/sitedata/image/201602/16/2016021601442_0.jpg" />
+		</div>
+		
+	</div>
+	<script>
+	// var idx = 0;
+
+	// $('.right').on('click', function() {
+
+	// 	if(idx < 2) {
+	// 		idx++;
+	// 	}
+
+	// 	var temp = document.getElementsByClassName('img' + idx)[0];
+
+	// 	if(idx === 0) {
+	// 		$(temp).css('display', 'block');
+	// 		$('.img1').css('display', 'none');
+	// 		$('.img2').css('display', 'none');
+	// 	}else if (idx === 1) {
+	// 		$(temp).css('display', 'block');
+	// 		$('.img0').css('display', 'none');
+	// 		$('.img2').css('display', 'none');
+	// 	}else if (idx === 2) {
+	// 		$(temp).css('display', 'block');
+	// 		$('.img0').css('display', 'none');
+	// 		$('.img1').css('display', 'none');
+	// 	}
+
+
+	// });
+
+	// $('.left').on('click', function() {
+
+	// 	if(idx > 0 ) {
+	// 		--idx;
+	// 	}
+
+	// 	var temp = document.getElementsByClassName('img' + idx)[0];
+
+	// 	if(idx === 0) {
+	// 		$(temp).css('display', 'block');
+	// 		$('.img1').css('display', 'none');
+	// 		$('.img2').css('display', 'none');
+	// 	}else if (idx === 1) {
+	// 		$(temp).css('display', 'block');
+	// 		$('.img0').css('display', 'none');
+	// 		$('.img2').css('display', 'none');
+	// 	}else if (idx === 2) {
+	// 		$(temp).css('display', 'block');
+	// 		$('.img0').css('display', 'none');
+	// 		$('.img1').css('display', 'none');
+	// 	}
+		
+	// });	
+
+
+	var idx = 0; // 시작하는 인덱스
+	var temp = document.getElementsByClassName('img'); // 내가 가지고 있는 이미지
+
+
+	// 버튼을 클릭했을 때 일어나는 이벤트
+	function tempControl() {
+		for(var i = 0; i < temp.length; i++) {
+			if(idx === i) {
+				$(temp[i]).css('display', 'block');
+			}else {
+				$(temp[i]).css('display', 'none');
+			}
+		}
+	}
+
+	//버튼을 클릭
+	$('.right').on('click', function() {
+		if(idx < temp.length - 1) {
+			idx++;
+		}else {
+			idx = 0;
+		}
+
+		tempControl();
+	});
+
+	$('.left').on('click', function() {
+		if(idx > 0) {
+			idx--;
+		}else {
+			idx = temp.length - 1;
+		}
+		tempControl();
+	});	
+	
+
+
+	</script>
+</body>
+</html>
