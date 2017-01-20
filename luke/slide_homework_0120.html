@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="http://html.gt.dev.daum.net/kidsnote-2016/service/_css/working/common.css">
+	<link rel="stylesheet" type="text/css" href="http://html.gt.dev.daum.net/kidsnote-2016/service/_css/working/style.css">
+	<style>
+		.paging_main .paging_num .on{background-color:red}
+		#slideList{overflow:hidden;position:absolute;top:0;left:0}
+		#slideList li{float:left;width:980px;height:420px;}
+	</style>
+</head>
+<body>
+	<div class="main_visual main_card">
+		<div>
+			<ul id="slideList" style="width:2940px"> <!— 슬라이드 이동시 width값 만큼 이동 —>
+				<li>
+					<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG); opacity: 1; display: block;">
+						<div class="main_title">
+							<strong class="tit_visual">
+								디아<br>짱짱맨
+							</strong>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG); opacity: 1; display: block;">
+						<div class="main_title">
+							<strong class="tit_visual">
+								Always <br> like this -
+							</strong>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/3jF/image/r05FnHa7Qib-d4sp_IRjXu8kOtE.jpg); opacity: 1; display: block;">
+						<div class="main_title">
+							<strong class="tit_visual">
+								디아<br>스고이
+							</strong>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="paging_main">
+			<span class="paging_num">
+				<span class="inner_num">
+					<button type="button" class="num_page">1</button>
+					<button type="button" class="num_page on">2<span class="screen_out">현재페이지</span></button>
+					<button type="button" class="num_page">3</button>
+				</span>
+			</span>
+			<button type="button" class="btn_paging btn_prev"><span class="ico_comm">prev</span></button>
+			<button type="button" class="btn_paging btn_next"><span class="ico_comm">next</span></button>
+		</div>
+	</div>
+
+	<script>
+		window.onload = function() {
+
+		    var currentPage = 0;
+		    var totalPage = document.getElementsByClassName("slide_visual").length;
+			var btnArr = document.getElementsByClassName("btn_paging");
+
+			addBtnHandler();
+
+			//next, prev 버튼 이벤트 등록
+			function addBtnHandler() {
+                for(var i=0; i<btnArr.length; i++) {
+                    var btn = btnArr[i];
+                    btn.onclick = nextPrevBtnClickHandler;
+                }
+			}
+
+			//next, prev 클릭이벤트 핸들러
+			function nextPrevBtnClickHandler(e) {
+			    var clickBtn = e.target.innerHTML;
+
+			    if(clickBtn === "next") {
+
+				} else {
+
+				}
+			}
+		}
+	</script>
+</body>
+</html>
