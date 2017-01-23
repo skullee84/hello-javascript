@@ -6,9 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="http://html.gt.dev.daum.net/kidsnote-2016/service/_css/working/style.css">
 	<style>
 		.paging_main .paging_num .on{background-color:red}
-		#slideList{overflow:hidden;position:absolute;top:0;left:0}
+		#slideList{overflow:hidden;top:0;left:0}
 		#slideList li{float:left;width:980px;height:420px;}
 	</style>
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 	<div class="main_visual main_card">
@@ -18,28 +19,28 @@
 					<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG); opacity: 1; display: block;">
 						<div class="main_title">
 							<strong class="tit_visual">
-								디아<br>짱짱맨
+								1. 디아<br>파워드링킹
 							</strong>
 						</div>
 					</div>
 				</li>
 				<li>
-					<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG); opacity: 1; display: block;">
-						<div class="main_title">
-							<strong class="tit_visual">
-								Always <br> like this -
-							</strong>
-						</div>
-					</div>
+                    <div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/3jF/image/r05FnHa7Qib-d4sp_IRjXu8kOtE.jpg); opacity: 1; display: block;">
+                        <div class="main_title">
+                            <strong class="tit_visual">
+                                2. 디아<br>파워츄리닝
+                            </strong>
+                        </div>
+                    </div>
 				</li>
 				<li>
-					<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/3jF/image/r05FnHa7Qib-d4sp_IRjXu8kOtE.jpg); opacity: 1; display: block;">
-						<div class="main_title">
-							<strong class="tit_visual">
-								디아<br>스고이
-							</strong>
-						</div>
-					</div>
+                    <div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG); opacity: 1; display: block;">
+                        <div class="main_title">
+                            <strong class="tit_visual">
+                                3. 디아<br>파워스모
+                            </strong>
+                        </div>
+                    </div>
 				</li>
 			</ul>
 		</div>
@@ -59,11 +60,27 @@
 	<script>
 		window.onload = function() {
 
+		    //슬라이드 관련 페이징, 슬라이드 거리, 스피드
+			//currentPage 는 전역변수로 좌우클릭, 하단네비 클릭시 이동해야할 위치를 담아쥼
 		    var currentPage = 0;
 		    var totalPage = document.getElementsByClassName("slide_visual").length;
-			var btnArr = document.getElementsByClassName("btn_paging");
+            var slideDistance = 980;
+			var slideSpeed = 300;
 
+			//하단 인디케이터 온오프 클래스
+            var naviOnClassName = "num_page on";
+            var naviOffClassName = "num_page";
+
+            //조작할 버튼, 슬라이드 변수 선언
+		    var slideContainer = document.getElementById("slideList");
+			var btnArr = document.getElementsByClassName("btn_paging");
+			var naviArr = document.getElementsByClassName("num_page");
+
+			//클릭 이벤트 달아주고
 			addBtnHandler();
+
+			//0페이지 셋팅 고고고
+           slideHandler();
 
 			//next, prev 버튼 이벤트 등록
 			function addBtnHandler() {
@@ -71,17 +88,68 @@
                     var btn = btnArr[i];
                     btn.onclick = nextPrevBtnClickHandler;
                 }
+
+                for(var i=0; i<naviArr.length; i++) {
+                    var naviBtn = naviArr[i];
+                    naviBtn.index = i;
+                    naviBtn.onclick = naviClickHandler;
+                }
 			}
 
 			//next, prev 클릭이벤트 핸들러
 			function nextPrevBtnClickHandler(e) {
+			    //클릭한 버튼 내용 담아주고
 			    var clickBtn = e.target.innerHTML;
 
+			    //다음인지 이전인지 체크, 페이지 범위는 0, 1, 2 총3개~~~
 			    if(clickBtn === "next") {
-
+			        if(currentPage + 1 < totalPage) { //현재 페이지에서 1 넘어갔을때 페이지범위 이내이면, 페이지 증가시키고 슬라이드 고고
+                        currentPage++;
+                    } else {
+			            //alert("마지막 페이지 입니다");
+					}
 				} else {
-
+                    if(currentPage - 1 >= 0) { //현재 페이지에서 1 돌아갈때 페이지범위 이내이면, 페이지 증가시키고 슬라이드 고고
+                        currentPage--;
+                    } else {
+                        //alert("첫번째 페이지 입니다");
+					}
 				}
+
+				//슬라이드 애니메이션 시키는 함수
+                slideHandler();
+			}
+
+			//하단 인디케이터 클릭
+            function naviClickHandler(e) {
+			    //하단 3개의 인디케이터 인덱스 0, 1, 2 를 체크하여 해당페이지로 바로 쇽쇽 넘김
+                currentPage = e.target.index;
+                slideHandler();
+            }
+
+
+
+            function slideHandler() {
+			    //일단 하단 네비 활성화 해쥼
+			    checkNaviPosition();
+
+			    //이동해야할 위치타겟임(3개이므로 좌측마진은 0, -980, -1960임);
+                var targetPosition = -(currentPage * slideDistance) + "px";
+
+                //해당 위치로 슬라이드 고고!
+                $(slideContainer).animate({"margin-left": targetPosition}, slideSpeed);
+
+            }
+
+            function checkNaviPosition() {
+			    //현재페이지와 맞는놈은 파워ON, 아닌놈은 파워OFF
+                for(var i=0; i<naviArr.length; i++) {
+                    if(i === currentPage) {
+                        naviArr[i].className = naviOnClassName;
+                    } else {
+                        naviArr[i].className = naviOffClassName;
+                    }
+                }
 			}
 		}
 	</script>
