@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>123</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<style type="text/css">
+	img{display:none}
+	img.on{display:inline-block}
+	.screen_out{overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px}
+</style>
+<body>
+	<div>
+		<div id="result">
+			<img class="image" src="images/1.png" alt="" style="display:block">
+			<img class="image" src="images/2.png" alt="">
+			<img class="image" src="images/3.png" alt="">
+		</div>
+		<div class="paging_main">
+			<span class="paging_num">
+				<span class="inner_num">
+					<button type="button" class="num_page">1</button>
+					<button type="button" class="num_page">2</button>
+					<button type="button" class="num_page">3</button>
+				</span>
+			</span>
+		</div>
+		<button class="left">왼쪽</button>
+		<button class="right">오른쪽</button>
+	</div>
+	<script type="text/javascript">
+		var index = 0;
+		var temp = document.getElementsByClassName('image');
+		var paging = document.getElementsByClassName('num_page');
+
+		function changePicture(idx){
+			for (var i = 0; i < temp.length; i++) {
+				if(idx == i){
+					console.log( temp[i] );
+					$(temp[i]).css('display','block');
+				}else{
+					$(temp[i]).css('display','none');
+				}
+			}
+		}
+		function colorPaging(arg){
+			for (var i = 0; i < paging.length; i++ ){
+				if(arg == i){
+					console.log( paging[i] );
+					$(paging[i]).css('color','#f00');
+				}else{
+					$(paging[i]).css('color','#000');
+				}
+			}
+		}
+		$('.right').on('click', function(event) {
+			if(index < temp.length-1){
+				index++;
+			}else if(index == temp.length-1){
+				index = '0';
+			}
+			console.log( '지금 인덱스 값',index );
+			changePicture(index);
+			colorPaging(index);
+		});
+		$('.left').on('click', function(event) {
+			if(index > 0){
+				index--;
+			}else{
+				index = temp.length-1;
+			}
+			changePicture(index);
+			colorPaging(index);
+			console.log( '지금 인덱스 값',index );
+		});
+	</script>
+</body>
+</html>
