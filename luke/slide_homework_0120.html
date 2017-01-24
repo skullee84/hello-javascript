@@ -37,7 +37,7 @@
                     <div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG); opacity: 1; display: block;">
                         <div class="main_title">
                             <strong class="tit_visual">
-                                3. 디아<br>파워스모킹
+                                3. 디아<br>파워지각러
                             </strong>
                         </div>
                     </div>
@@ -58,6 +58,7 @@
 	</div>
 
 	<script>
+
         !function () {
 		    //슬라이드 관련 페이징, 슬라이드 거리, 스피드
 			//currentPage 는 전역변수로 좌우클릭, 하단네비 클릭시 이동해야할 위치를 담아쥼
@@ -105,13 +106,13 @@
 			        if(currentPage + 1 < totalPage) { //현재 페이지에서 1 넘어갔을때 페이지범위 이내이면, 페이지 증가시키고 슬라이드 고고
                         currentPage++;
                     } else {
-			            //alert("마지막 페이지 입니다");
+			            alert("마지막 페이지 입니다");
 					}
 				} else {
                     if(currentPage - 1 >= 0) { //현재 페이지에서 1 돌아갈때 페이지범위 이내이면, 페이지 증가시키고 슬라이드 고고
                         currentPage--;
                     } else {
-                        //alert("첫번째 페이지 입니다");
+                        alert("첫번째 페이지 입니다");
 					}
 				}
 
