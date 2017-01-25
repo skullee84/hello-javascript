@@ -22,14 +22,14 @@
 		<div class="paging_main">
 			<span class="paging_num">
 				<span class="inner_num">
-					<button type="button" class="num_page">1</button>
+					<button type="button" class="num_page" style="color:#f00">1</button>
 					<button type="button" class="num_page">2</button>
 					<button type="button" class="num_page">3</button>
 				</span>
 			</span>
 		</div>
-		<button class="left">왼쪽</button>
-		<button class="right">오른쪽</button>
+		<button data-name = "left" class="moveBtn left">왼쪽</button>
+		<button class="moveBtn right">오른쪽</button>
 	</div>
 	<script type="text/javascript">
 		var index = 0;
@@ -38,44 +38,61 @@
 
 		function changePicture(idx){
 			for (var i = 0; i < temp.length; i++) {
-				if(idx == i){
-					console.log( temp[i] );
-					$(temp[i]).css('display','block');
-				}else{
-					$(temp[i]).css('display','none');
-				}
+				var isCurrentIdx = (idx == i);
+				$(temp[i]).css('display', isCurrentIdx ? 'block' : 'none');
+				$(paging[i]).css('color', isCurrentIdx ? '#f00' : '#000');
 			}
 		}
-		function colorPaging(arg){
-			for (var i = 0; i < paging.length; i++ ){
-				if(arg == i){
-					console.log( paging[i] );
-					$(paging[i]).css('color','#f00');
-				}else{
-					$(paging[i]).css('color','#000');
-				}
-			}
-		}
-		$('.right').on('click', function(event) {
-			if(index < temp.length-1){
-				index++;
-			}else if(index == temp.length-1){
-				index = '0';
-			}
-			console.log( '지금 인덱스 값',index );
+		// 페이징 클릭
+		$('.num_page').on('click', function() {
+			index = $('.num_page').index(this);
 			changePicture(index);
-			colorPaging(index);
 		});
-		$('.left').on('click', function(event) {
-			if(index > 0){
-				index--;
+		$('.moveBtn').on('click', function() {
+			var isLeftBtn = $(this).hasClass('left'); //$(this).data('name') == 'left';
+			// isLeftBtn 왼쪽 버튼 클릭하면 true
+			// isLeftBtn 오른쪽 버튼 클릭하면 false
+			if(isLeftBtn){
+				index > 0 ? index-- : index = temp.length-1;
+				changePicture(index);
 			}else{
-				index = temp.length-1;
+				index == temp.length-1 ? index = '0' : index++;
+				changePicture(index);
 			}
-			changePicture(index);
-			colorPaging(index);
-			console.log( '지금 인덱스 값',index );
 		});
+			// $('.right').on('click', function(event) {
+			// 	if(index < temp.length-1){
+			// 		index++;
+			// 	}else if(index == temp.length-1){
+			// 		index = '0';
+			// 	}
+				
+			// });
+			// $('.left').on('click', function(event) {
+			// 	if(index > 0){
+			// 		index--;
+			// 	}else{
+			// 		index = temp.length-1;
+			// 	}
+			// 	changePicture(index);
+			// });
+
+			// if(isLeftBtn){
+			// 	if(index > 0){
+			// 		index--;
+			// 	}else{
+			// 		index = temp.length-1;
+			// 	}
+			// 	changePicture(index);
+			// }else{
+			// 	if(index < temp.length-1){
+			// 		index++;
+			// 	}else if(index == temp.length-1){
+			// 		index = '0';
+			// 	}
+			// 	changePicture(index);
+			// }
+		
 	</script>
 </body>
 </html>
