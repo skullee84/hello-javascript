@@ -60,7 +60,7 @@
 	<script>
 
         !function () {
-		    //슬라이드 관련 페이징, 슬라이드 거리, 스피드
+            //슬라이드 관련 페이징, 슬라이드 거리, 스피드
 			//currentPage 는 전역변수로 좌우클릭, 하단네비 클릭시 이동해야할 위치를 담아쥼
 		    var currentPage = 0;
 		    var totalPage = document.getElementsByClassName("slide_visual").length;
@@ -98,6 +98,7 @@
 
 			//next, prev 클릭이벤트 핸들러
 			function nextPrevBtnClickHandler(e) {
+			    //console.log(btnArr.indexOf(e.target));
 			    //클릭한 버튼 내용 담아주고
 			    var clickBtn = e.target.innerHTML;
 
@@ -151,6 +152,7 @@
                     }
                 }
 			}
+
         }();
 	</script>
 </body>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="http://html.gt.dev.daum.net/kidsnote-2016/service/_css/working/common.css">
+	<link rel="stylesheet" type="text/css" href="http://html.gt.dev.daum.net/kidsnote-2016/service/_css/working/style.css">
+	<style>
+		.paging_main .paging_num .on{background-color:red}
+		#slideList{overflow:hidden;top:0;left:0}
+		#slideList li{float:left;width:980px;height:420px;}
+	</style>
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<div class="main_visual main_card">
+		<div>
+			<ul id="slideList" style="width:2940px"> <!— 슬라이드 이동시 width값 만큼 이동 —>
+				<li>
+					<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG); opacity: 1; display: block;">
+						<div class="main_title">
+							<strong class="tit_visual">
+								1. 뤀<br>프로토타입기반
+							</strong>
+						</div>
+					</div>
+				</li>
+				<li>
+                    <div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/3jF/image/r05FnHa7Qib-d4sp_IRjXu8kOtE.jpg); opacity: 1; display: block;">
+                        <div class="main_title">
+                            <strong class="tit_visual">
+                                2. 뤀<br>별거아니구만
+                            </strong>
+                        </div>
+                    </div>
+				</li>
+				<li>
+                    <div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG); opacity: 1; display: block;">
+                        <div class="main_title">
+                            <strong class="tit_visual">
+                                3. 뤀<br>대충이해햇심
+                            </strong>
+                        </div>
+                    </div>
+				</li>
+			</ul>
+		</div>
+		<div class="paging_main">
+			<span class="paging_num">
+				<span class="inner_num">
+					<button type="button" class="num_page on">1</button>
+					<button type="button" class="num_page">2<span class="screen_out">현재페이지</span></button>
+					<button type="button" class="num_page">3</button>
+				</span>
+			</span>
+			<button type="button" class="btn_paging btn_prev"><span class="ico_comm">prev</span></button>
+			<button type="button" class="btn_paging btn_next"><span class="ico_comm">next</span></button>
+		</div>
+	</div>
+
+	<script>
+
+        !function () {
+            var btnArr = document.getElementsByClassName('btn_paging');
+            var naviArr = document.getElementsByClassName('num_page');
+
+            //이미지 갯수, 현재페이지
+            var totalPage = naviArr.length;
+            var currentPageNum = 0;
+
+            var slideDistance = 980;
+            var slideSpeed = 300;
+
+            //하단 인디케이터 온오프 클래스
+            var naviOnClassName = "num_page on";
+            var naviOffClassName = "num_page";
+
+            var slideContainer = document.getElementById("slideList");
+
+
+
+            //next prev
+			(function ButtonManager() {
+                for(var i = 0; i < btnArr.length; i++) {
+                    btnArr[i].onclick = btnClickHandler;
+                }
+                function btnClickHandler(e) {
+                    controller.nextPrevClickHandler(e.target.innerHTML);
+                }
+            })();
+
+
+
+			//bottom navigation
+            function NaviManager() {
+                for(var i = 0; i < naviArr.length; i++) {
+                    naviArr[i].index = i;
+                    naviArr[i].onclick = naviClickHandler;
+                }
+                function naviClickHandler(e) {
+                    controller.updateScreen(e.target.index);
+                }
+            }
+            NaviManager.prototype.updateNavi = function(targetNum) {
+                for(var i = 0; i < naviArr.length; i++) {
+                    naviArr[i].className = i == targetNum ? naviOnClassName : naviOffClassName;
+                }
+
+			}
+
+
+            //SlideManager
+            function SlideManager() {
+            }
+            SlideManager.prototype.updateSlide = function(targetPage) {
+                var targetPosition = -(targetPage * slideDistance) + "px";
+                $(slideContainer).animate({"margin-left": targetPosition}, slideSpeed);
+			}
+
+
+
+            //btn, navi, slide controller
+            function ControllerManager() {
+			}
+            ControllerManager.prototype.nextPrevClickHandler = function(direction) {
+				var isNext = direction == 'next';
+                controller.updateScreen( controller.updatePageHandler(isNext) );
+			}
+			ControllerManager.prototype.updatePageHandler = function(isNext) {
+                var targetPage;
+                if(isNext) {
+                    targetPage = currentPageNum + 1 < totalPage ? currentPageNum + 1 : totalPage - 1;
+				} else {
+                    targetPage = currentPageNum - 1 >= 0 ? currentPageNum - 1 : 0;
+				}
+				return targetPage;
+			}
+			ControllerManager.prototype.updateScreen = function(targetPage) {
+                //이동 하고자 하는 페이지와 현재 페이지가 다를때만. 처리 안해주면 같은페이지일경우에도 계속 실행됨
+				if(targetPage !== currentPageNum) {
+				    console.log("UPDATE SCREEN");
+                    naviManager.updateNavi(targetPage);
+                    slideManager.updateSlide(targetPage);
+                    currentPageNum = targetPage;
+				}
+			}
+
+
+			//////////
+
+            var naviManager = new NaviManager();
+            var slideManager = new SlideManager();
+            var controller = new ControllerManager();
+
+            //0페이지 셋팅
+            controller.updateScreen(currentPageNum);
+
+        }();
+	</script>
+</body>
+</html>
