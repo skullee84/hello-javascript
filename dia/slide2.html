@@ -107,6 +107,11 @@
 
 	}
 
+	$('.paging_num .num_page').on('click', function() {
+		$('.paging_num .num_page').removeClass('on');
+		$(this).addClass('on');
+	});
+	
 	$('.btn_next').on('click', function() {
 
 		if(index < slideThumb.length -1) {
