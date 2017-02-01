@@ -68,7 +68,8 @@
 
                 //좌우클릭 달아쥼
                 for(var i = 0; i < btnArr.length; i++) {
-                    btnArr[i].onclick = btnClickHandler;
+                    //btnArr[i].onclick = btnClickHandler;
+                    btnArr[i].addEventListener('click', btnClickHandler);
                 }
 
                 //클릭하면 컨트롤러한테 좌우버튼 클릭했다고 알랴쥼
@@ -89,7 +90,8 @@
                 //하단 네비 클릭 달아쥼
                 for(var i = 0; i < this.naviArr.length; i++) {
                     this.naviArr[i].index = i;
-                    this.naviArr[i].onclick = naviClickHandler;
+                    //this.naviArr[i].onclick = naviClickHandler
+                    this.naviArr[i].addEventListener('click', naviClickHandler);
                 }
 
                 //클릭하면 컨트롤러한테 밑에 쩜샛키들 클릭햇다고 알랴쥼
