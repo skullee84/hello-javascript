@@ -60,97 +60,124 @@
 	<script>
 
         !function () {
-            var btnArr = document.getElementsByClassName('btn_paging');
-            var naviArr = document.getElementsByClassName('num_page');
-
-            //이미지 갯수, 현재페이지
-            var totalPage = naviArr.length;
-            var currentPageNum = 0;
-
-            var slideDistance = 980;
-            var slideSpeed = 300;
-
-            //하단 인디케이터 온오프 클래스
-            var naviOnClassName = "num_page on";
-            var naviOffClassName = "num_page";
-
-            var slideContainer = document.getElementById("slideList");
-
-
 
             //next prev
-			(function ButtonManager() {
+			function ButtonManager(controller) {
+			    var controller = controller;
+                var btnArr = document.getElementsByClassName('btn_paging');
+
+                //좌우클릭 달아쥼
                 for(var i = 0; i < btnArr.length; i++) {
                     btnArr[i].onclick = btnClickHandler;
                 }
+
+                //클릭하면 컨트롤러한테 좌우버튼 클릭했다고 알랴쥼
                 function btnClickHandler(e) {
                     controller.nextPrevClickHandler(e.target.innerHTML);
                 }
-            })();
+            };
 
 
 
 			//bottom navigation
-            function NaviManager() {
-                for(var i = 0; i < naviArr.length; i++) {
-                    naviArr[i].index = i;
-                    naviArr[i].onclick = naviClickHandler;
+            function NaviManager(controller) {
+                var controller = controller;
+                this.naviOnClassName = "num_page on";
+                this.naviOffClassName = "num_page";
+                this.naviArr = document.getElementsByClassName('num_page');
+
+                //하단 네비 클릭 달아쥼
+                for(var i = 0; i < this.naviArr.length; i++) {
+                    this.naviArr[i].index = i;
+                    this.naviArr[i].onclick = naviClickHandler;
                 }
+
+                //클릭하면 컨트롤러한테 밑에 쩜샛키들 클릭햇다고 알랴쥼
                 function naviClickHandler(e) {
                     controller.updateScreen(e.target.index);
                 }
             }
-            NaviManager.prototype.updateNavi = function(targetNum) {
-                for(var i = 0; i < naviArr.length; i++) {
-                    naviArr[i].className = i == targetNum ? naviOnClassName : naviOffClassName;
-                }
 
+            //네비게이션 온오프 해서 현재위치 업데이트 해주는 넘( 컨트롤러가 이거저거 할거 다 하면 너님 페이지 활성화 되야함 하고 알랴쥼)
+            NaviManager.prototype.updateNavi = function(targetNum) {
+                for(var i = 0; i < this.naviArr.length; i++) {
+                    this.naviArr[i].className = i == targetNum ? this.naviOnClassName : this.naviOffClassName;
+                }
 			}
+
 
 
             //SlideManager
+			//이샛킨 기능없이 시키는 대로 하는놈
             function SlideManager() {
+                //슬라이드 할놈 잡아두고, 속도랑 슬라이드 거리 설정해쥼
+                this.slideContainer = document.getElementById("slideList");
+                this.slideDistance = 980;
+                this.slideSpeed = 300;
             }
+            //컨트롤러가 할거 다하고 너님 슬라이드 하삼 하면 슬라이드 하고 끝
             SlideManager.prototype.updateSlide = function(targetPage) {
-                var targetPosition = -(targetPage * slideDistance) + "px";
-                $(slideContainer).animate({"margin-left": targetPosition}, slideSpeed);
+                var targetPosition = -(targetPage * this.slideDistance) + "px";
+                $(this.slideContainer).animate({"margin-left": targetPosition}, this.slideSpeed);
 			}
 
 
 
-            //btn, navi, slide controller
+            //클릭하고 머하고 하는거 이샛키가 다 처리...
             function ControllerManager() {
 			}
+
+			//셋팅 네비게이션 슬라이드가 어떤놈이 될지 설정해쥼
+			ControllerManager.prototype.addManager = function(navi, slide) {
+				this.naviManager = navi;
+                this.slideManager = slide;
+                this.totalPage = this.naviManager.naviArr.length;
+                this.currentPageNum = 0;
+			}
+
+			//좌우버튼 클릭시 이놈을 호출해줌
             ControllerManager.prototype.nextPrevClickHandler = function(direction) {
 				var isNext = direction == 'next';
                 controller.updateScreen( controller.updatePageHandler(isNext) );
 			}
+            //좌우체크해서 몇 페이지로 가야할지 계산때려쥼
 			ControllerManager.prototype.updatePageHandler = function(isNext) {
                 var targetPage;
                 if(isNext) {
-                    targetPage = currentPageNum + 1 < totalPage ? currentPageNum + 1 : totalPage - 1;
+                    targetPage = this.currentPageNum + 1 < this.totalPage ? this.currentPageNum + 1 : this.totalPage - 1;
 				} else {
-                    targetPage = currentPageNum - 1 >= 0 ? currentPageNum - 1 : 0;
+                    targetPage = this.currentPageNum - 1 >= 0 ? this.currentPageNum - 1 : 0;
 				}
 				return targetPage;
 			}
+			//화면갱신하자.슬라이드 할놈 슬라이드 시켜쥼. 네비게이션 활성화 될놈 활성화 시켜쥼
 			ControllerManager.prototype.updateScreen = function(targetPage) {
                 //이동 하고자 하는 페이지와 현재 페이지가 다를때만. 처리 안해주면 같은페이지일경우에도 계속 실행됨
-				if(targetPage !== currentPageNum) {
-				    console.log("UPDATE SCREEN");
-                    naviManager.updateNavi(targetPage);
-                    slideManager.updateSlide(targetPage);
-                    currentPageNum = targetPage;
+				if(targetPage !== this.currentPageNum) {
+				    //console.log("UPDATE SCREEN");
+                    this.naviManager.updateNavi(targetPage);
+                    this.slideManager.updateSlide(targetPage);
+                    this.currentPageNum = targetPage;
 				}
 			}
 
-            var naviManager = new NaviManager();
-            var slideManager = new SlideManager();
+			//이새끼가 클릭이고 지랄이고 다 처리해쥼
             var controller = new ControllerManager();
 
-            //0페이지 셋팅
-            controller.updateScreen(currentPageNum);
+            //이샛키는 좌우 클릭하면 controller한테 클릭했다고 알랴줌
+            var btnManager = new ButtonManager(controller)
 
+            //이샛키는 밑에 네비 클릭하면 controller한테 클릭했다고 알랴줌
+            var naviManager = new NaviManager(controller);
+
+            //이샛키는 controller가 움직이라는대로 슬라이드만 하는샛키
+            var slideManager = new SlideManager();
+
+            //컨트롤러에 애샛키들 보내쥼
+            controller.addManager(naviManager, slideManager);
+
+            //다 준비 됐으면 0페이지부터 시작하삼
+            controller.updateScreen(0);
         }();
 	</script>
 </body>
