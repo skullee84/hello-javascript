@@ -16,21 +16,21 @@
 		<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG);display:block;"> 
 			<div class="main_title">
 				<strong class="tit_visual">
-					디아<br>짱짱맨
+					디아<br>짜라짜라짱짱짱1
 				</strong>
 			</div>
 		</div>
-		<div class="slide_visual" style="background-image: url(https://mud-kage.kakaocdn.net/dn/0Q0XU/btqfkUkMXzO/U6FwKoTrfCcP51wgNypx41/img.jpg)"> 
+		<div class="slide_visual" style="background-image: url(https://mud-kage.kakaocdn.net/dn/0Q0XU/btqfkUkMXzO/U6FwKoTrfCcP51wgNypx41/img.jpg);display:none;"> 
 			<div class="main_title">
 				<strong class="tit_visual">
-					Always <br> like this -
+					디아<br>짜라짜라짱짱짱2
 				</strong>
 			</div>
 		</div>
-		<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/3jF/image/r05FnHa7Qib-d4sp_IRjXu8kOtE.jpg)"> 
+		<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/3jF/image/r05FnHa7Qib-d4sp_IRjXu8kOtE.jpg);display:none;"> 
 			<div class="main_title">
 				<strong class="tit_visual">
-					디아<br>스고이
+					디아<br>짜라짜라짱짱짱3
 				</strong>
 			</div>
 		</div>
@@ -48,95 +48,53 @@
 	</div>
 </body>
 <script type="text/javascript">
+
 	var index = 0;
-	$('.slide_visual').css('display', 'none');
-	$('.slide_visual').first().css('display', 'block');
 	var slideThumb = document.getElementsByClassName('slide_visual');
 	var pagingNum = document.getElementsByClassName('num_page');
+	var btnPosition = document.getElementsByClassName('btn_paging');
+
+
+	btnEvent();
+	console.log(btnEvent())
 
 	function thumbControl(idx) {
-
 		for(var i = 0; i < slideThumb.length; i++) {
-
-			if(idx == i) {
-				$(slideThumb[i]).css({display: 'block', opaicty: '1'});
-			}else {
-				$(slideThumb[i]).css({display: 'none', opaicty: '0'});
-			}
-
-
+			idx == i ? $(slideThumb[i]).css({display: 'block'}) : $(slideThumb[i]).css({display: 'none'})
 		}
 	}
-	
-	// var toggle = false;
-	// var handle = null;
-	// window.onload = function() {
-	// 	startInterval();
-	// }
-	// function startInterval() {
-	// 	if(handle == null) {
-	// 		handle = setInterval(function() {
-	// 			autoRolling();
-	// 		}, 500);
-	// 	}
-	// }
-	// function stopInterval() {
-	// 	clearInterval(handle);
-	// 	handle = null;
-	// }
-	// function autoRolling() {
-	// 	if(toggle) {
-	// 		$(slideThumb).css({opaicty: '1'});
-
-	// 	}else {
-	// 		$(slideThumb).css({opaicty: '0'});
-	// 	}
-	// 	toggle = !toggle;
-	// }
 
 	function PagingControl(idx) {
-
 		for(var i = 0; i < pagingNum.length; i++) {
-			if(idx == i) {
-				// $(pagingNum[i]).hasClass('on');
-				$(pagingNum[i]).addClass('on');
-			}else {
-				$(pagingNum[i]).removeClass('on')
-			}
+			var paging = pagingNum[i];
+			idx == i ? paging.classList.add('on') : paging.classList.remove('on');
 		}
-
 	}
 
 	$('.paging_num .num_page').on('click', function() {
 		$('.paging_num .num_page').removeClass('on');
 		$(this).addClass('on');
-	});
-	
-	$('.btn_next').on('click', function() {
 
-		if(index < slideThumb.length -1) {
-			index++;
-		} else {
-			index = 0;
-		}
+		index = $(this)[0].innerText -1;
 		thumbControl(index);
-		PagingControl(index);
 
 	});
 
-	$('.btn_prev').on('click', function() {
+	function btnEvent() {
+		var isLeftBtn = btnPosition.classList.contains('btn_prev');
+	};
 
-		if(index > 0) {
-			index--;
-		} else {
-			index = slideThumb.length -1;
+	$('.btn_paging').on('click', function() {
+		var isLeftBtn = $(this).hasClass('btn_prev');
+		if(isLeftBtn) {
+			index > 0 ? index-- : index = slideThumb.length-1;
+			thumbControl(index);
+			PagingControl(index);
+		}else {
+			index == slideThumb.length -1 ? index = '0' : index++;
+			thumbControl(index);
+			PagingControl(index);
 		}
-		
-		thumbControl(index);
-		PagingControl(index);
-		
 	});
-
-
 </script>
 </html>
