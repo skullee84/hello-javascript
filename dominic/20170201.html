@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+  <div>
+    <input />
+
+    <ul id="gnb">
+    </ul>
+    <ul id="news">
+    </ul>
+
+    <button>Menu1</button>
+    <button>Menu2</button>
+  </div>
+
+  <script>
+    var data = {
+      menus: [''],
+      news: [],
+      slideThumb: [
+        'http:....',
+        'http:....'
+      ],
+      footer: {
+        companyName: 'kakao corp',
+        companyEmail: 'asd@asd.com'
+      },
+      peoples: [
+        {
+          title: '이모티콘 작가 구경선',
+          subTitle: '이모티콘 배니를 통해서...',
+          thumbImageUrl: 'http:....'
+        }
+      ]
+    };
+
+    var menus = {
+      'Menu1': ['도미닉', '주드', '디아', '루크'],
+      'Menu2': ['공지', '자유', '익명', '장터']
+    };
+
+    $('button').on('click', function(e) {
+      drawMenus(menus[e.target.innerHTML]);
+    });
+
+    function drawMenus(data) {
+      var html = '';
+      for(var i in data) {
+        html += '<li>' + data[i] + '</li>';
+      }
+
+      document.getElementById('gnb').innerHTML = html;
+    }
+  </script>
+</body>
+</html>
