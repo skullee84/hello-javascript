@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>박스뭅뭅뭅</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+    <style>
+        body {
+            margin-left: 10px;
+            margin-top : 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="boxContainer" style="width: 640px; height: 480px; border: 5px solid #8b211e">
+    </div>
+    <div>
+        <button>Play()</button>
+        <button>Stop()</button>
+    </div>
+
+    <script>
+        function CreateBox() {
+            var boxContainer = document.getElementById('boxContainer');
+            boxContainer.innerHTML = '<div id="moveBox" style="width: 100px; height: 100px; background-color:blue; "></div>';
+        }
+        var box = new CreateBox();
+
+        //setInterval(boxMove, 10);
+
+        var speed = 1;
+        var vSpeed = 1;
+        var hSpeed = 1;
+        function boxMove() {
+            var moveBox = document.getElementById('moveBox');
+            speed += 2;
+            moveBox.style.marginLeft = speed + 'px';
+            moveBox.style.marginTop = speed + 'px';
+        }
+    </script>
+</body>
+</html>

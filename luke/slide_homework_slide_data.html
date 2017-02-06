@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="http://html.gt.dev.daum.net/kidsnote-2016/service/_css/working/common.css">
+	<link rel="stylesheet" type="text/css" href="http://html.gt.dev.daum.net/kidsnote-2016/service/_css/working/style.css">
+	<style>
+		.paging_main .paging_num .on{background-color:red}
+		#slideList {overflow:hidden;top:0;left:0}
+		#slideList li{float:left;width:980px;height:420px;}
+	</style>
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<div class="main_visual main_card">
+		<div>
+			<ul id="slideList">
+				<!--
+				<li>
+					<div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG); opacity: 1; display: block;">
+						<div class="main_title">
+							<strong class="tit_visual">
+								1. 뤀<br>프로토타입기반
+							</strong>
+						</div>
+					</div>
+				</li>
+				<li>
+                    <div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/3jF/image/r05FnHa7Qib-d4sp_IRjXu8kOtE.jpg); opacity: 1; display: block;">
+                        <div class="main_title">
+                            <strong class="tit_visual">
+                                2. 뤀<br>별거아니구만
+                            </strong>
+                        </div>
+                    </div>
+				</li>
+				<li>
+                    <div class="slide_visual" style="background-image: url(https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG); opacity: 1; display: block;">
+                        <div class="main_title">
+                            <strong class="tit_visual">
+                                3. 뤀<br>대충이해햇심
+                            </strong>
+                        </div>
+                    </div>
+				</li>
+				-->
+			</ul>
+		</div>
+		<div class="paging_main">
+			<span class="paging_num">
+				<span id="pageList" class="inner_num">
+					<!--
+					<button type="button" class="num_page on">1</button>
+					<button type="button" class="num_page">2<span class="screen_out">현재페이지</span></button>
+					<button type="button" class="num_page">3</button>
+					-->
+				</span>
+			</span>
+			<button type="button" class="btn_paging btn_prev"><span class="ico_comm">prev</span></button>
+			<button type="button" class="btn_paging btn_next"><span class="ico_comm">next</span></button>
+		</div>
+	</div>
+
+	<script>
+
+        !function () {
+            function jsonLoad() {
+                $.ajax({url: "temp_data/slide_list.json", success: function(result){
+                    renderSlide(result["slideData"]);
+                }});
+            }
+
+			function renderSlide(retultData) {
+                var imageWidth = 980;
+				var slideContainer = document.getElementById('slideList');
+				var slideHtml = "";
+                var pageContainer = document.getElementById('pageList');
+                var pageHtml = "";
+
+				//슬라이드 리스트 생성
+                for(var i=0; i<retultData.length; i++) {
+                    var imageUrl = retultData[i]["imageUrl"];
+                    var title = retultData[i]["title"];
+                    var slideTemplete = '<li><div class="slide_visual" style="background-image: url(' + imageUrl + '); opacity: 1; display: block">' +
+										'<div class="main_title"><strong class="tit_visual">' + title + '</strong></div>' +
+										'</div></li>';
+                    slideHtml = slideHtml + slideTemplete;
+				}
+                slideContainer.style.width = imageWidth * retultData.length + "px";
+                slideContainer.innerHTML = slideHtml;
+
+                //페이지 리스트 생성
+                for(i=0; i<retultData.length; i++) {
+                	var pageTemplete = '<button type="button" class="num_page">' + i + '</button>';
+                    pageHtml = pageHtml + pageTemplete;
+                }
+                pageContainer.innerHTML = pageHtml;
+
+                initSlide(retultData);
+			}
+
+			function initSlide(retultData) {
+                var currentPage = 0;
+                var totalPage = retultData.length;
+                var slideDistance = 980;
+                var slideSpeed = 300;
+
+                var btnArr = document.getElementsByClassName("btn_paging");
+                var naviArr = document.getElementsByClassName("num_page");
+
+                for(var i=0; i<btnArr.length; i++) {
+                    var btn = btnArr[i];
+                    btn.onclick = function(e) {
+                        var clickBtn = e.target.innerHTML;
+                        if(clickBtn === "next") {
+                            currentPage = currentPage + 1 < totalPage ? currentPage + 1 : totalPage - 1;
+                        } else {
+                            currentPage = currentPage - 1 >= 0 ? currentPage - 1 : 0;
+                        }
+                        slideHandler();
+					}
+                }
+
+                for(i=0; i<naviArr.length; i++){
+                    var naviBtn = naviArr[i];
+                    naviBtn.index = i;
+                    naviBtn.onclick = function() {
+                        currentPage = this.index;
+                        slideHandler();
+					}
+				}
+
+                function checkNaviPosition() {
+                    var naviOnClassName = "num_page on";
+                    var naviOffClassName = "num_page";
+                    for(var i=0; i<naviArr.length; i++) {
+                        naviArr[i].className = i === currentPage ? naviOnClassName : naviOffClassName;
+                    }
+                }
+
+                function slideHandler() {
+                    checkNaviPosition();
+                    var targetPosition = -(currentPage * slideDistance) + "px";
+                    $(document.getElementById('slideList')).animate({"margin-left": targetPosition}, slideSpeed);
+				}
+
+                slideHandler();
+			}
+
+            jsonLoad();
+
+        }();
+	</script>
+</body>
+</html>

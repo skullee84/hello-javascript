@@ -121,7 +121,7 @@
             SlideManager.prototype.updateSlide = function(targetPage) {
                 var targetPosition = -(targetPage * this.slideDistance) + "px";
                 $(this.slideContainer).animate({"margin-left": targetPosition}, this.slideSpeed);
-			}
+			};
 
 
 
@@ -135,13 +135,13 @@
                 this.slideManager = slide;
                 this.totalPage = this.naviManager.naviArr.length;
                 this.currentPageNum = 0;
-			}
+			};
 
 			//좌우버튼 클릭시 이놈을 호출해줌
             ControllerManager.prototype.nextPrevClickHandler = function(direction) {
 				var isNext = direction == 'next';
                 controller.updateScreen( controller.updatePageHandler(isNext) );
-			}
+			};
             //좌우체크해서 몇 페이지로 가야할지 계산때려쥼
 			ControllerManager.prototype.updatePageHandler = function(isNext) {
                 var targetPage;
@@ -151,7 +151,7 @@
                     targetPage = this.currentPageNum - 1 >= 0 ? this.currentPageNum - 1 : 0;
 				}
 				return targetPage;
-			}
+			};
 			//화면갱신하자.슬라이드 할놈 슬라이드 시켜쥼. 네비게이션 활성화 될놈 활성화 시켜쥼
 			ControllerManager.prototype.updateScreen = function(targetPage) {
                 //이동 하고자 하는 페이지와 현재 페이지가 다를때만. 처리 안해주면 같은페이지일경우에도 계속 실행됨
@@ -161,7 +161,7 @@
                     this.slideManager.updateSlide(targetPage);
                     this.currentPageNum = targetPage;
 				}
-			}
+			};
 
 			//이새끼가 클릭이고 지랄이고 다 처리해쥼
             var controller = new ControllerManager();

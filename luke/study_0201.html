@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <div>
+        <button>menu1</button>
+        <button>menu2</button>
+        <ul id="gnb"></ul>
+    </div>
+    <script>
+        var gnb = document.getElementById('gnb');
+        var menuData = {
+            'menu1' : ['a1', 'a2', 'a3'],
+            'menu2' : ['b1', 'b2', 'b3', 'b4', 'b5']
+        };
+
+        var btnArr = document.getElementsByTagName('button');
+
+        for(var i=0; i<btnArr.length; i++) {
+            btnArr[i].addEventListener('click', btnClickHandler);
+        }
+
+        function btnClickHandler(e) {
+            updateMenu(e.target.innerHTML);
+        }
+
+        function updateMenu(type) {
+            var resultData = menuData[type];
+            var html = '';
+            for(var i in resultData) {
+                html += '<li>' + resultData[i] + '</li>';
+            }
+            gnb.innerHTML = html;
+        }
+
+        updateMenu('menu1');
+
+    </script>
+</body>
+</html>

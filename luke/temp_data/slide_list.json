@@ -1,0 +1,23 @@
+{
+  "slideData" : [
+    {"imageUrl" : "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG",
+      "title" : "1번 슬라이드"
+    },
+    {"imageUrl" : "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/3jF/image/r05FnHa7Qib-d4sp_IRjXu8kOtE.jpg",
+      "title" : "2번 슬라이드"
+    },
+    {"imageUrl" : "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG",
+      "title" : "3번 슬라이드"
+    },
+    {"imageUrl" : "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/3jF/image/r05FnHa7Qib-d4sp_IRjXu8kOtE.jpg",
+      "title" : "4번 슬라이드"
+    },
+    {"imageUrl" : "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/68s/image/W7xUoUNPIFoBdJlcuBkPZ946Y6g.JPG",
+      "title" : "5번 슬라이드"
+    },
+    {
+      "imageUrl": "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/3jF/image/r05FnHa7Qib-d4sp_IRjXu8kOtE.jpg",
+      "title": "6번 슬라이드"
+    }
+  ]
+}
