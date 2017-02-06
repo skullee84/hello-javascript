@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<div>
+		<button>Menu1</button>
+		<button>Menu2</button>
+		<ul id="gnb">
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		
+		// var html = '';
+
+		// for loop
+		// for (var i = 0; i < 10; i++) {
+		// 	html += '<li>' + i + '</li>'
+		// };
+
+		// var menus = ['게시판' , '회사소개' , '사이트맵'];
+
+		//for each
+		// for(var i in menus) {
+		// 	html += '<li>' + menus[i] + '</li>'
+		// }
+
+		// $('#gnb').html(html);
+
+		// classList = 배열로 / 돔 컨트
+		// classNmae = value
+		
+
+		var menu = {
+			'Menu1': ['도미닉', '주드', '디아', '루크'],
+			'Menu2': ['1', '2', '3', '4']
+		};
+
+		
+		$('button').on('click', function(e){ 
+
+			//데이터 
+			var data = menu[e.target.innerHTML];
+
+			// for문을 돌며 li를 데이터에 맞게 그려줌
+			var gnb = document.getElementById('gnb');
+			gnb.innerHTML = '';
+			for(var i in data) {
+				gnb.innerHTML += '<li>' + data[i] + '</li>'
+			};
+
+		});
+
+
+
+		//console.log(e.target.innerHTML) // 이벤트객체
+		//console.log(this) // DOM
+		//jQuery template........ search!!!
+			
+	</script>
+</body>
+</html>
