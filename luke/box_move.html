@@ -18,27 +18,63 @@
     <div id="boxContainer" style="width: 640px; height: 480px; border: 5px solid #8b211e">
     </div>
     <div>
-        <button>Play()</button>
-        <button>Stop()</button>
+        <button class="play_stop">Play()</button>
+        <button class="play_stop">Stop()</button>
     </div>
 
     <script>
-        function CreateBox() {
-            var boxContainer = document.getElementById('boxContainer');
-            boxContainer.innerHTML = '<div id="moveBox" style="width: 100px; height: 100px; background-color:blue; "></div>';
+        function Box() {
+            this.boxContainer = document.getElementById('boxContainer');
+            this.boxContainer.innerHTML = '<div id="moveBox" style="width: 100px; height: 100px; background-color:blue; "></div>';
+            this.moveBox = document.getElementById('moveBox');
         }
-        var box = new CreateBox();
+        var box = new Box();
 
-        //setInterval(boxMove, 10);
 
-        var speed = 1;
-        var vSpeed = 1;
-        var hSpeed = 1;
+        function setting() {
+            var btnArr = document.getElementsByClassName('play_stop');
+            for(var i = 0; i < btnArr.length; i++) {
+                var btn = btnArr[i];
+                btn.addEventListener('click', playStopHandler);
+            }
+        }
+        setting();
+
+        var moveInterval = 0;
+
+        function playStopHandler(e) {
+            var btn = e.target;
+            if(btn.innerHTML == 'Play()') {
+                if(moveInterval == 0) {
+                    moveInterval = setInterval(boxMove, 10);
+                }
+            } else {
+                if(moveInterval == 1) {
+                    clearInterval(moveInterval);
+                    moveInterval = 0;
+                }
+            }
+        }
+
+        var positionX = 0;
+        var positionY = 0;
+        var speedX = 2;
+        var speedY = 2;
+
         function boxMove() {
-            var moveBox = document.getElementById('moveBox');
-            speed += 2;
-            moveBox.style.marginLeft = speed + 'px';
-            moveBox.style.marginTop = speed + 'px';
+            var rect = box.moveBox.getBoundingClientRect();
+            speedX = rect.right > 660 || rect.left < 10 ? speedX * -1 : speedX;
+            speedY = rect.bottom > 500 || rect.top < 10 ? speedY * -1 : speedY;
+
+            positionX += speedX;
+            positionY += speedY;
+            // parent position relative
+            // elem position absolute
+
+            box.moveBox.style.marginLeft = positionX + 'px';
+            box.moveBox.style.marginTop = positionY + 'px';
+
+            //checkArea();
         }
     </script>
 </body>
