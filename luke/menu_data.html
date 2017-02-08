@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #menu, #menu ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        /* (2) #menu 디자인 - 그라디언트, 그림자, 모서리 */
+        #menu {
+            width: 100%;
+            margin: 60px auto 20px;
+            border: 1px solid #222;
+            background-color: #111;
+            background-image: linear-gradient(#444, #111);
+            border-radius: 6px;
+            box-shadow: 0 1px 1px #777;
+        }
+
+        /* (3) 목록(li) 디자인 */
+        #menu li {
+            float: left;
+            border-right: 1px solid #222;
+            box-shadow: 1px 0 0 #444;
+            position: relative;
+        }
+
+        #menu li a {
+            padding: 12px 30px;
+            color: #999;
+            font: 12px bold helvetica 'Malgun Gothic';
+            text-decoration: none;
+            text-shadow: 0 1px 0 #000;
+        }
+
+        /* 마우스 오버시 변화 */
+        #menu li:hover > a {
+            color: #fafafa;
+        }
+
+        /* (4) float 속성 해제 - #menu 영역 넓히기 */
+        #menu::before, #menu::after {
+            content: '';
+            display: block;
+        }
+
+        #menu::after {
+            clear: both;
+        }
+
+        /* (5) 2차 메뉴 디자인 */
+        #menu ul {
+            margin: 20px 0 0 0;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background: #444;
+            background: linear-gradient(#444, #111);
+            box-shadow: 0 -1px 0 rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+
+        #menu ul li {
+            float: none;
+            display: block;
+            border: 0;
+            box-shadow: 0 1px 0 #111, 0 2px 0 #666;
+        }
+
+        #menu ul a {
+            padding: 10px;
+            width: 80px;
+            display: block;
+            float: none;
+        }
+
+        /* 마지막 목록의 설정값 지움 */
+        #menu ul li:last-child {
+            box-shadow: none;
+        }
+
+        /* 2차메뉴 호버시 배경색 */
+        #menu ul a:hover {
+            background-color: #0186ba;
+            background-image: linear-gradient(#04acec, #0186ba);
+        }
+        /* 메뉴 영역 상하 넓히고 분류 좁히기*/
+        #menu li a {
+            float: left;
+        }
+
+        /* 첫번째/마지막 서브메뉴 호버시 디자인 */
+        #menu ul li:first-child > a {
+            border-radius: 3px 3px 0 0;
+        }
+
+        #menu ul li:last-child > a {
+            border-radius: 0 0 3px 3px;
+        }
+
+        /* 2차 메뉴 상단에 화살표(삼각형) 만들기 */
+        #menu ul li:first-child > a:after {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: -6px;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid #444;
+        }
+
+        /* 서브메뉴 숨기기 */
+        #menu ul {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* 마우스 호버시 서브메뉴 보이기 */
+        #menu li:hover > ul {
+            opacity: 1;
+            visibility: visible;
+            margin: 0;
+        }
+
+        /* 호버시 트랜지션 효과 부여 */
+        #menu ul {
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* 1차 메뉴 영역 균등 분할 */
+        #menu li {
+            width: 19.9%;
+        }
+
+        #menu li:last-child {
+            border-right: none;
+            box-shadow: none;
+        }
+
+        #menu ul li {
+            width: 100%;
+        }
+
+    </style>
+    <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <div id="nav">
+        <ul id="menu">
+        </ul>
+        <div id="contents">여기는 컨텐츠들 자리</div>
+    </div>
+
+    <script>
+        !function () {
+            function jsonLoad() {
+                $.ajax({url: "temp_data/slide_list.json", success: function(result){
+                    initMenu(result["menuData"]);
+                }});
+            }
+
+            function initMenu(data) {
+                var menu = document.getElementById('menu');
+                var menuHtml = '';
+                var contentContainer = document.getElementById("contents");
+
+                for(var i = 0; i < data.length; i++) {
+                    menuHtml += '<li class="subMenu"><a>' + data[i].title + '</a><ul>';
+
+                    var subMenuData = data[i].menu;
+
+                    for(var j = 0; j < subMenuData.length; j++) {
+                        menuHtml += '<li class="subMenu"><a>' + subMenuData[j].title+ '</a></li>';
+                    }
+
+                    menuHtml += '</ul></li>';
+                }
+                menu.innerHTML = menuHtml;
+
+                var subMenuArr = document.getElementsByClassName("subMenu");
+                for(var i = 0; i<subMenuArr.length; i++) {
+                    var menu = subMenuArr[i];
+                    menu.addEventListener('click', menuClickHandler);
+                }
+
+                function menuClickHandler(e) {
+                    var target = e.target;
+                    //console.log(target.innerHTML);
+                    contentContainer.innerHTML = target.innerHTML + "해당하는 데이터들 나와주셈";
+                }
+            }
+            jsonLoad();
+        }();
+    </script>
+</body>
+</html>

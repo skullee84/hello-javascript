@@ -20,16 +20,31 @@
     <div>
         <button class="play_stop">Play()</button>
         <button class="play_stop">Stop()</button>
+        <button class="play_stop">duplicate()</button>
     </div>
 
     <script>
         function Box() {
+            //생성자에서 최초 1개의 박스를 그려주고,
+            //생성된 박스에 움직임 기능을 부여해주기
+            var defaultWidth = 150;
+            var defaultHeight = 150;
+
             this.boxContainer = document.getElementById('boxContainer');
-            this.boxContainer.innerHTML = '<div id="moveBox" style="width: 100px; height: 100px; background-color:blue; "></div>';
+            this.boxContainer.innerHTML = '<div class="box" id="moveBox" style="width: ' + defaultWidth + 'px; height: ' + defaultHeight + 'px; background-color:blue; "></div>';
+
             this.moveBox = document.getElementById('moveBox');
         }
-        var box = new Box();
 
+        Box.prototype.createBox = function() {
+            var boxArr = document.getElementsByClassName('box');
+        }
+
+        Box.prototype.duplicateBox = function() {
+        }
+
+        var box = new Box();
+        //box.createBox();
 
         function setting() {
             var btnArr = document.getElementsByClassName('play_stop');
@@ -48,11 +63,13 @@
                 if(moveInterval == 0) {
                     moveInterval = setInterval(boxMove, 10);
                 }
-            } else {
-                if(moveInterval == 1) {
+            } else if(btn.innerHTML == 'Stop()') {
+                if(moveInterval != 0) {
                     clearInterval(moveInterval);
                     moveInterval = 0;
                 }
+            } else {
+                box.duplicate();
             }
         }
 
