@@ -110,7 +110,7 @@
 
                 for(var i=0; i<btnArr.length; i++) {
                     var btn = btnArr[i];
-                    btn.onclick = function(e) {
+                    btn.addEventListener('click', function(e) {
                         var clickBtn = e.target.innerHTML;
                         if(clickBtn === "next") {
                             currentPage = currentPage + 1 < totalPage ? currentPage + 1 : totalPage - 1;
@@ -118,16 +118,16 @@
                             currentPage = currentPage - 1 >= 0 ? currentPage - 1 : 0;
                         }
                         slideHandler();
-					}
+                    });
                 }
 
                 for(i=0; i<naviArr.length; i++){
                     var naviBtn = naviArr[i];
                     naviBtn.index = i;
-                    naviBtn.onclick = function() {
+                    naviBtn.addEventListener('click', function() {
                         currentPage = this.index;
                         slideHandler();
-					}
+                    });
 				}
 
                 function checkNaviPosition() {
@@ -146,6 +146,8 @@
 
                 slideHandler();
 			}
+
+
 
             jsonLoad();
 
