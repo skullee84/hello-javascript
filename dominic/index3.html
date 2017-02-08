@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  ul {
+    text-align: center;
+    list-style: none;
+  }
+  li {
+    border: 1px solid red;
+  }
+  div {
+    width: 200px;
+    height: 21px;
+    margin: 100px auto 0;
+  }
+  .list {
+    overflow: hidden;
+    margin-top: 0px;
+  }
+</style>
+<body>
+  <div>
+    <button id="startBtn">Start</button>
+    <button id="stopBtn">Stop</button>
+  </div>
+  <div class="list">
+    <ul id="slider">
+      <li>1. 넌 바보야</li>
+      <li>2. 나도 바보야</li>
+      <li>3. 안녕?</li>
+      <li>4. 떵먹어</li>
+      <li>5. 많이먹어</li>
+      <li>6. 너도먹어</li>
+      <li>7. 고마워</li>
+    </ul>
+  </div>
+
+  <script>
+    var options = {
+      targetElm: document.getElementById('xxxx'),
+      vertical: true,
+      speed: 3000,
+      autoplay: true
+    }
+
+    function Slider(options) {
+      
+    }
+
+    new Slider(options);
+
+    var slider = document.getElementById('slider');
+    var startBtn = document.getElementById('startBtn');
+    var stopBtn = document.getElementById('stopBtn');
+    var currentInterval = null;
+
+    slider.addEventListener('webkitTransitionEnd', function() {
+      var targetElm = slider.firstElementChild;
+      slider.removeChild(targetElm);
+      slider.appendChild(targetElm);
+
+      setTagStyle(slider, {
+        "webkitTransition": "",
+        "webkitTransform": 'translate3d(0px, 0px, 0px)'
+      });
+    });
+
+    startBtn.addEventListener('click', function() {
+      if(!currentInterval) {
+        currentInterval = setInterval(function() {
+          setTagStyle(slider, {
+            "webkitTransition": ".5s",
+            "webkitTransform": 'translate3d(0px, -21px, 0px)'
+          });
+        }, 1000);
+      }
+    });
+
+    stopBtn.addEventListener('click', function() {
+      clearInterval(currentInterval);
+      currentInterval = null;
+    });
+
+    function setTagStyle(elm, styles) {
+      for(var key in styles) {
+        elm.style[key] = styles[key];
+      }
+    }
+  </script>
+</body>
+</html>
