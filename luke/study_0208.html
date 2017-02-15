@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="libs/slideComponent.js"></script>
     <style>
         h1{
             text-align: center;
@@ -21,21 +22,42 @@
         li {
             border: 1px solid darkblue;
         }
-        div {
+        .verticalList {
             width: 200px;
             height: 21px;
             overflow: hidden;
             margin: 100px auto 0;
         }
+
+        .horizontalList {
+              width: 200px;
+              height: 21px;
+              overflow: hidden;
+              margin: 300px auto 0;
+          }
+
+        #horizontalSlider {overflow:hidden;top:0;left:0;width:2000px}
+        #horizontalSlider li{float:left;width:200px;height:21px;}
     </style>
 </head>
 <body>
-    <div>
+    <div id="btnContainer">
         <button id="startBtn">Start</button>
         <button id="stopBtn">Stop</button>
     </div>
-    <div class="list">
-        <ul id="slider">
+    <div class="verticalList">
+        <ul id="verticalSlider">
+            <li>텍스트1</li>
+            <li>텍스트2</li>
+            <li>텍스트3</li>
+            <li>텍스트4</li>
+            <li>텍스트5</li>
+            <li>텍스트6</li>
+            <li>텍스트7</li>
+        </ul>
+    </div>
+    <div class="horizontalList">
+        <ul id="horizontalSlider">
             <li>텍스트1</li>
             <li>텍스트2</li>
             <li>텍스트3</li>
@@ -46,50 +68,29 @@
         </ul>
     </div>
     <script>
-        var setId = null;
 
-        var startBtn = document.getElementById('startBtn');
-        startBtn.addEventListener('click', function() {
-            if(!setId) {
-                setId = setInterval(moveList, 1000);
-            }
-        });
+        var verticalSlideListContainer = document.getElementById('verticalSlider');
+        var horizontalSlideListContainer = document.getElementById('horizontalSlider');
 
-        var stopBtn = document.getElementById('stopBtn');
-        stopBtn.addEventListener('click', function() {
-            clearInterval(setId);
-            setId = null;
-        });
-
-        var slider = document.getElementById('slider');
-        slider.addEventListener('transitionend', transitionCompleteHandler);
-
-        function transitionCompleteHandler() {
-            var tgElement = slider.firstElementChild;
-
-            slider.removeChild(tgElement);
-            slider.appendChild(tgElement);
-
-            setTagStyle(slider, {
-                "webkitTransition" : "0s",
-                "webkitTransform" : 'translateY(0px)'
-            });
+        var options = {
+            slideSpeed : 0.2,
+            slideDirection : "vertical",
+            slideDelay : 3000,
+            slideAutoPlay : true
         }
 
-        function moveList() {
-            //console.log(slider.childNodes);
-            var tgElementHeight = slider.firstElementChild.offsetHeight * -1;
-            setTagStyle(slider, {
-                "webkitTransition" : ".5s",
-                "webkitTransform" : 'translateY(' + tgElementHeight + 'px)'
-            });
-        }
+        var slideVertical = new Slide( verticalSlideListContainer,  options);
+        slideVertical.update();
 
-        function setTagStyle(element, styles) {
-            for(var key in styles) {
-                element.style[key] = styles[key];
-            }
+        options = {
+            slideSpeed : 0.2,
+            slideDirection : "horizon",
+            slideDelay : 1000,
+            slideAutoPlay : true
         }
+        var slideHorizon = new Slide( horizontalSlideListContainer,  options);
+        slideHorizon.update();
+
     </script>
 </body>
 </html>

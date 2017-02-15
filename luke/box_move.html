@@ -12,10 +12,15 @@
             margin-top : 10px;
             margin-right: 10px;
         }
+        .box {
+            position: absolute;
+            background-color: palevioletred;
+            border: 1px solid;
+        }
     </style>
 </head>
 <body>
-    <div id="boxContainer" style="width: 640px; height: 480px; border: 5px solid #8b211e">
+    <div id="boxContainer" style="position: relative; width: 640px; height: 480px; border: 5px solid #8b211e">
     </div>
     <div>
         <button class="play_stop">Play()</button>
@@ -24,75 +29,83 @@
     </div>
 
     <script>
+
+
+
+        function BoxMove(box) {
+            this.box = box;
+        }
+
+        BoxMove.prototype.startMove = function() {
+            var box = this.box;
+            var positionX = 0;
+            var positionY = 0;
+            var speedX = 2;
+            var speedY = 2;
+            var areaWidth = 660;
+            var areaHeight = 500;
+
+            setInterval(function() {
+                var rect = box.getBoundingClientRect();
+                speedX = rect.right > areaWidth || rect.left < 10 ? speedX * -1 : speedX;
+                speedY = rect.bottom > areaHeight || rect.top < 10 ? speedY * -1 : speedY;
+
+                positionX += speedX;
+                positionY += speedY;
+
+                var tgX = positionX + 'px';
+                var tgY = positionY + 'px';
+                box.style.transform = "translate(" + tgX + "," + tgY + ")";
+            }, 10);
+        };
+
         function Box() {
-            //생성자에서 최초 1개의 박스를 그려주고,
-            //생성된 박스에 움직임 기능을 부여해주기
-            var defaultWidth = 150;
-            var defaultHeight = 150;
-
+            this.defaultWidth = 150;
+            this.defaultHeight = 150;
             this.boxContainer = document.getElementById('boxContainer');
-            this.boxContainer.innerHTML = '<div class="box" id="moveBox" style="width: ' + defaultWidth + 'px; height: ' + defaultHeight + 'px; background-color:blue; "></div>';
-
-            this.moveBox = document.getElementById('moveBox');
+            this.createBox();
         }
 
         Box.prototype.createBox = function() {
-            var boxArr = document.getElementsByClassName('box');
-        }
+            var box = document.createElement('div');
+            box.className = "box";
+            box.id = "moveBox";
 
-        Box.prototype.duplicateBox = function() {
-        }
+            box.style.width = this.defaultWidth + "px";
+            box.style.height = this.defaultHeight + "px";
+
+            this.boxContainer.appendChild(box);
+
+            var boxMove = new BoxMove(box);
+            boxMove.startMove();
+
+            //복제시도하면
+            //내 자신의 위치와 사이즈를 기반으로
+            //두개를 그려넣어주고
+            //본인은 삭제한다
+            //그리고 그 두개놈에 박스객체를 심어줌(움직임, 복제)
+        };
 
         var box = new Box();
-        //box.createBox();
 
-        function setting() {
-            var btnArr = document.getElementsByClassName('play_stop');
-            for(var i = 0; i < btnArr.length; i++) {
-                var btn = btnArr[i];
-                btn.addEventListener('click', playStopHandler);
-            }
+        var btnArr = document.getElementsByClassName('play_stop');
+
+        for(var i = 0; i < btnArr.length; i++) {
+            var btn = btnArr[i];
+            btn.addEventListener('click', playStopHandler);
         }
-        setting();
-
-        var moveInterval = 0;
 
         function playStopHandler(e) {
             var btn = e.target;
             if(btn.innerHTML == 'Play()') {
-                if(moveInterval == 0) {
-                    moveInterval = setInterval(boxMove, 10);
-                }
+
             } else if(btn.innerHTML == 'Stop()') {
-                if(moveInterval != 0) {
-                    clearInterval(moveInterval);
-                    moveInterval = 0;
-                }
+
             } else {
-                box.duplicate();
+                box.createBox();
             }
         }
 
-        var positionX = 0;
-        var positionY = 0;
-        var speedX = 2;
-        var speedY = 2;
-
-        function boxMove() {
-            var rect = box.moveBox.getBoundingClientRect();
-            speedX = rect.right > 660 || rect.left < 10 ? speedX * -1 : speedX;
-            speedY = rect.bottom > 500 || rect.top < 10 ? speedY * -1 : speedY;
-
-            positionX += speedX;
-            positionY += speedY;
-            // parent position relative
-            // elem position absolute
-
-            box.moveBox.style.marginLeft = positionX + 'px';
-            box.moveBox.style.marginTop = positionY + 'px';
-
-            //checkArea();
-        }
     </script>
 </body>
 </html>
