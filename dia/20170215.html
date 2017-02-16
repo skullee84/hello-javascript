@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+폴다운 메뉴 만들기
+<div id="gnb"></div>
+<script type="text/javascript">
+	var data = [
+		{
+			name: '메뉴1',
+			subMenu: ['A', 'B', 'C', 'D']
+		}, {
+			name: '메뉴2',
+			subMenu: ['1', '2', '3', '4']
+		}, {
+			name: '메뉴3',
+			subMenu: ['가', '나', '다', '라']
+		}
+	];
+
+	// for
+	// create Element
+	// addEventListener
+	// css
+
+	for (var i = 0; i < 3; i++) {
+		gnb.innerHTML += '<a href="#none">' + data[i].name + '</a>'	
+	};
+
+	function mouseHover() {
+		for (var i = 0; i < 3; i++) {
+			var link = document.getElementsByTagName('a')[i];
+			link.innerHTML += '<span>' + data[i].subMenu + '</span>';	
+		};
+	}
+
+	var link = document.getElementsByTagName('a')[0]
+	
+	link.addEventListener('mouseenter', function (){
+		console.log('enter!!!!!!!!')
+	});
+
+	link.addEventListener('mouseleave', function (){
+		console.log('leave.................kkkk')
+	});
+
+
+
+
+</script>
+</body>
+</html>
