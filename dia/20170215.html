@@ -2,6 +2,13 @@
 <html>
 <head>
 	<title></title>
+	<style>
+		a {
+			float:left;
+			width:100px;
+			margin-right: 30px
+		}
+	</style>
 </head>
 <body>
 폴다운 메뉴 만들기
@@ -29,24 +36,27 @@
 		gnb.innerHTML += '<a href="#none">' + data[i].name + '</a>'	
 	};
 
-	function mouseHover() {
-		for (var i = 0; i < 3; i++) {
-			var link = document.getElementsByTagName('a')[i];
-			link.innerHTML += '<span>' + data[i].subMenu + '</span>';	
-		};
-	}
+	for (var i = 0; i < 3; i++) {
+		var link = document.getElementsByTagName('a')[i]
+		link.innerHTML += '<div style="display:none">' + data[i].subMenu + '</div>';	
 
-	var link = document.getElementsByTagName('a')[0]
+
+		link.addEventListener('mouseleave', function (e){
+
+			var subMenuName = e.target.lastChild
+			subMenuName.style.display = 'none';
+			
+		});
+
+		link.addEventListener('mouseenter', function (e){
+			
+			var subMenuName = e.target.lastChild
+			subMenuName.style.display = 'block';
+
+		});
+	};
+
 	
-	link.addEventListener('mouseenter', function (){
-		console.log('enter!!!!!!!!')
-	});
-
-	link.addEventListener('mouseleave', function (){
-		console.log('leave.................kkkk')
-	});
-
-
 
 
 </script>
