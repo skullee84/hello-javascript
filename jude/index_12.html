@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>123</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+	<style>
+		*{padding:0;margin:0}
+		h1{text-align:center}
+		ul{list-style:none;text-align:center}
+		li{border:1px solid red}
+		div{overflow:hidden;width:200px;height:21px;margin:100px auto 0}
+	</style>
+</head>
+<body>
+	<div>
+		<ul id="slider">
+			<li>움직여보자 ~!</li>
+			<li>누가</li>
+			<li>언제</li>
+			<li>어디서</li>
+			<li>무엇을</li>
+			<li>어떻게</li>
+			<li>왜</li>
+		</ul>
+	</div>
+	<div>
+		<button type="button" id="startBtn">시작</button>
+		<button type="button" id="stopBtn">정지</button>
+	</div>
+	<script type="text/javascript">
+		var startBtn = document.getElementById('startBtn');
+		var stopBtn = document.getElementById('stopBtn');
+		var slider = document.getElementById('slider');
+		var currentIntervar = null;
+		var li = document.getElementsByTagName('li');
+
+		slider.addEventListener('webkitTransitionEnd',function(){
+			slider.appendChild(li[0]);
+			setTagStyle(slider, {
+				"webkitTransition" : "",
+				"webkitTransform" : 'translate3d(0px, 0px, 0px)'
+			})
+		});
+		// slider.childNodes[1].offsetHeight
+		
+		// function Slider(option) {
+
+		// }
+		// var test = new Slider(option);
+
+
+		startBtn.addEventListener('click',function(){
+			if(!currentIntervar){
+				currentIntervar = setInterval(function(){
+					setTagStyle(slider, {
+						"webkitTransition" : ".5s",
+						"webkitTransform" : 'translate3d(0px,-21px, 0px)',
+					})
+				}, 1000);
+			}
+		});
+		stopBtn.addEventListener('click',function(){
+			clearInterval(currentIntervar);
+			currentIntervar = null;
+		});
+		
+		function setTagStyle(elm, styles){
+			for( var key in styles ){
+				
+				elm.style[key] = styles[key];
+			}
+		}
+		
+		
+	</script>
+</body>
+</html>

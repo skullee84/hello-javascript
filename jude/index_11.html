@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>123</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<div>
+		<ul id="gnb">
+			<li>바보</li>
+			<li>멍청이</li>
+			<li>똥개</li>
+			<li>빠가야로</li>
+		</ul>
+		<button class="btn">Menu1</button>
+		<button class="btn2">Menu2</button>
+	</div>
+	<script>
+		var menus = {
+			'Menu1' : ['도미닉','쥬드','디아','루크'],
+			'Menu2' : ['공지','자유','익명','장터']
+		};
+		
+		var gnb = document.getElementById('gnb');
+
+		$('button').on('click', function(e) {
+			var html = '';
+			var data = menus[e.target.innerHTML];
+			for( i in data ){
+				html += '<li>' + data[i] + '</li>';
+			}
+			gnb.innerHTML = html;
+			// console.log(menus[e.target.innerHTML]);
+		});
+		// for 문을 돌며 li에 데이터에 맞게 그려준다.
+		var btn = document.getElementsByTagName('button');
+		
+		for( var i = 0 ; i < btn.length ; i++){
+			console.log( btn[i] );
+		}
+
+		// console.log( btn.length );
+		
+		
+	</script>
+</body>
+</html>
