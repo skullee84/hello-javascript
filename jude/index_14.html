@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>123</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		/*function hello(){
+			return function(){
+				return "hello";
+			}
+		}
+		console.log( hello()() );*/
+
+
+
+
+
+		/*function hello(a,b){
+			console.log( 'called hello...', a, b() );
+		}
+
+		hello('hahaha', function(){
+			return "5";
+		});*/
+
+		var eventMap = {
+			click: function(b) {
+				console.log('click');
+				b('a');
+			},
+			mouseover: function() {
+				console.log('over');
+			}
+		}
+
+		function hello(a,b){
+			eventMap[a](b);
+			// if(a == 'click'){
+			// 	console.log( 'click ok' );
+			// }else if(a == 'done'){
+			// 	console.log( 'done ok' );
+			// }
+		}
+
+		hello('click', function(result){
+			console.log( result );
+		});
+
+		hello('mouseover', function(result){
+			// console.log( result );
+		});
+
+	</script>
+</body>
+</html>
