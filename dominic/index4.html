@@ -1,46 +1,58 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title></title>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
 </head>
+
 <body>
-  <div>
-    <button id="closeBtn">XXXXXXXX</button>
+  <div style="width:500px;margin:100px auto">
+    <div id="result">0</div>
+    <div style="width:105px;margin:0 auto">
+      <button id="btnPlus">+</button>
+      <button id="btnMinus">-</button>
+    </div>
   </div>
+
   <script>
-  var Scoller = (function() {
-    var count = 0;
+    var Counter = (function() {
+      var displayNumber = 0;
 
-    function a() {
-      console.log('a');
-    }
+      function changeBy(period) {
+        displayNumber += period;
+        document.getElementById('result').innerHTML = displayNumber;
+      }
 
-    function incr() {
-      count++;
-    }
+      function drawNumber(e) {
+        var condition = e.target.id == 'btnPlus';
+        changeBy(condition ? 1 : -1);
+        
+        // if(e.target.id == 'btnPlus') {
+        //   changeBy(1);
+        // }else {
+        //   changeBy(-1);
+        // }
+      }
 
-    function play() {
-      console.log(count);
-    }
+      function addEvent(targetArray) {
+        targetArray.forEach((elmId, idx) => {
+          var element = document.getElementById(elmId);
+          element.addEventListener('click', drawNumber.bind(this));
+        });
+      }
 
-    return {
-      a: a,
-      incr: incr,
-      play: play
-    }
-  })();
+      return {
+        init: function(targetArray) {
+          addEvent(targetArray);
+        }
+      }
+    })();
 
-  Scoller.play(); // 0
-  Scoller.incr(); // ++
-  Scoller.play(); // 1
-  Scoller.incr();
-  Scoller.incr();
-  Scoller.incr();
-  Scoller.incr();
-  Scoller.play();
+    Counter.init(['btnPlus', 'btnMinus']);
   </script>
 </body>
+
 </html>
