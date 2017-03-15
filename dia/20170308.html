@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>dia.mond</title>
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+	<style>
+		#result {width:100px;height:100px;line-height:100px;font-size:20px;text-align:center;margin:0 auto 10px;border:1px solid tan}
+		button {width:50px}
+	</style>
+</head>
+<body>
+	<div style="width:500px;margin:100px auto">
+		<div id="result"></div>
+		<div style="width:105px;margin:0 auto">
+			<button id="btnPlus">+</button>
+			<button id="btnMinus">-</button>
+		</div>
+	</div>
+	<script>
+
+
+	var Counter = (function() {
+		var resultNumber = 0;
+		function changeBy(period) { // 증감시켜주는 function
+			resultNumber += period;
+		}
+
+		function addEvent(targetArray) { // Event function
+			targetArray.forEach((elmId, idx) => {
+				document.getElementById(elmId).addEventListener('click', function() {
+
+				});
+			});
+		}
+
+		return {
+			init: function(eventTarget) {
+
+			},
+			plus: function() {
+				changeBy(1);
+			},
+			minus: function() {
+				changeBy(-1);
+			}
+		}
+	})();
+
+	Counter.init();
+
+
+	var resultNum = 0;
+	var resultSection = document.getElementById('result');
+
+	resultSection.innerHTML = resultNum;
+
+	function plusNumber() {
+		var plusText = document.getElementById('btnPlus');
+		var minusText = document.getElementById('btnMinus');
+		plusText.addEventListener('click', function() {
+			resultNum += 1
+			resultSection.innerHTML = resultNum;
+		});
+		minusText.addEventListener('click', function() {
+			resultNum -= 1
+			resultSection.innerHTML = resultNum;
+		});
+	};
+
+	plusNumber();
+
+
+	</script>
+</body>
+</html>
