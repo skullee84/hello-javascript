@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+    <style>
+        #result {width:100px;height:100px;line-height:100px;font-size:20px;text-align:center;margin:0 auto 10px;border:1px solid tan}
+        button {width:50px}
+    </style>
+</head>
+<body>
+    <div style="width:500px;margin:100px auto">
+        <div id="result">0</div>
+        <div style="width:105px;margin:0 auto">
+            <button id="btnMinus">-</button>
+            <button id="btnPlus">+</button>
+        </div>
+    </div>
+
+<script>
+    var counter = (function(){
+        var result = document.getElementById('result');
+        var number = 0;
+
+        function updateNumber(num) {
+            number += num;
+            result.innerHTML = number.toString();
+        }
+
+        function addClick() {
+            document.getElementById('btnMinus').addEventListener('click', minusNum);
+            document.getElementById('btnPlus').addEventListener('click', plusNum);
+        }
+
+        function plusNum() {
+            updateNumber(1);
+        }
+
+        function minusNum() {
+            updateNumber(-1);
+        }
+
+        return {
+            init : function() {
+                addClick();
+            },
+            addClick : function(el, fn) {
+                document.getElementById(el).addEventListener('click', fn);
+            },
+            plusNum : function() {
+                updateNumber(1);
+            },
+            minusNum : function() {
+                updateNumber(-1);
+            }
+
+        }
+    })();
+
+    counter.init();
+
+</script>
+</body>
+</html>

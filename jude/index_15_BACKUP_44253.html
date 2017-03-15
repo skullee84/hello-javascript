@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>123</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<<<<<<< HEAD
+	<!-- jude_feature -->
+=======
+>>>>>>> feature/dia
+	<button type="button">+</button>
+	<button type="button">-</button>
+	<p id="result">0</p>
+	<script type="text/javascript">
+<<<<<<< HEAD
+		console.log( '2번째 작업' );
+=======
+>>>>>>> feature/dia
+		/*function init() {
+			var name = "Mozilla"; // name은 init에 의해 생성된 지역변수다
+			function displayName() { // displayName()은 내부 함수인, 클로저다
+				alert(name); // 부모 함수에서 선언된 변수를 사용한다
+			}
+			displayName();
+		}
+		init();*/
+
+
+		/*var counter = (function() {
+		  var privateCounter = 0;
+		  function changeBy(val) {
+		    privateCounter += val;
+		  }
+		  return {
+		    increment: function(x) {
+		      changeBy(x);
+		    },
+		    decrement: function(x) {
+		      changeBy(x);
+		    },
+		    value: function() {
+		      return privateCounter;
+		    }
+		  };   
+		})();
+
+		console.log(counter.value()); // logs 0
+		counter.increment(2);
+		counter.increment(3);
+		console.log(counter.value()); // logs 2
+		counter.decrement(-1);
+		console.log(counter.value()); // logs 1*/
+		
+		
+		var btn_click = document.getElementsByTagName('button');
+		var result = document.getElementById('result');
+
+		var write = (function(){
+			var num = 0;
+			function btnClick(value){
+				num += value;
+				result.innerHTML = num;
+			}
+			return {
+				plus: function(){
+					btnClick(1);
+				},
+				minus: function(){
+					btnClick(-1);
+				}
+			};
+		})();
+		btn_click[0].addEventListener('click', write.plus );
+		btn_click[1].addEventListener('click', write.minus );
+	</script>
+</body>
+</html>
