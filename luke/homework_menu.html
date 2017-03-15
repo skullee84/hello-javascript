@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <div id="menuContainer">
+    </div>
+
+    <script>
+        var menuContainer = document.getElementById('menuContainer');
+        var menuData = [
+            {
+                menuName : "menu 1",
+                subMenuList : ["menu 1_1", "menu 1_2", "menu 1_3"]
+            },
+            {
+                menuName : "menu 2",
+                subMenuList : ["menu 2_1", "menu 2_2", "menu 2_3"]
+            },
+            {
+                menuName : "menu 3",
+                subMenuList : ["menu 3_1", "menu 3_2", "menu 3_3"]
+            }
+        ];
+
+        for(var i = 0; i < menuData.length; i++) {
+            var divEl = document.createElement('ul');
+            divEl.style.float = "left";
+            divEl.innerHTML = "<button>menu div " + i + "</button>";
+            divEl.className = "firstDepth";
+            menuContainer.appendChild(divEl);
+
+            divEl.addEventListener('mouseover', mouseOverOutHandler);
+            divEl.addEventListener('mouseout', mouseOverOutHandler);
+
+            var subMenuList = menuData[i].subMenuList;
+
+
+            var subDiv = document.createElement('div');
+            subDiv.id = "subMenu";
+
+            for(var j = 0; j < subMenuList.length; j++) {
+                var subEl = document.createElement('li');
+                subEl.innerHTML = "<button>" + subMenuList[j] + "</button>";
+                subDiv.appendChild(subEl);
+                //subEl.addEventListener('click', subMenuClickHandler);
+            }
+            subDiv.style.display = "none";
+            divEl.appendChild(subDiv);
+        }
+
+        function mouseOverOutHandler(e) {
+            var tgEl = e.currentTarget;
+            var subEl = tgEl.lastChild;
+
+            if(e.type == 'mouseover') {
+                //tgEl.firstElementChild.style.display = "block";
+                subEl.style.display = "block";
+            } else {
+                //tgEl.firstElementChild.style.display = "none";
+                subEl.style.display = "none";
+            }
+        }
+
+
+    </script>
+</body>
+</html>
