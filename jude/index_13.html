@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>123</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+	<style>
+		#gnb{}
+		a{float:left;width:80px;line-height:30px;margin-left:5px;background:red;text-align:center}
+		a>a{display:none;margin:0;background:pink}
+	</style>
+</head>
+<body>
+	<div id="gnb"></div>
+	<script type="text/javascript">
+		var data = [
+			{
+				menu: '메뉴1',
+				submenu: [
+					'A','B','C','D','E'
+				]
+			},
+			{
+				menu: '메뉴2',
+				submenu: [
+					'1','2','3','4','5'
+				]
+			},
+			{
+				menu: '메뉴3',
+				submenu: [
+					'ㄱ','ㄴ','ㄷ','ㄹ','ㅁ'
+				]
+			}
+		];
+
+		// Data Set
+		var gnbList = document.getElementById('gnb');
+		function ttt() {
+			var newA = document.createElement('a');
+			newA.setAttribute('href','#none');
+			newA.setAttribute('class','link_txt');
+			gnbList.appendChild(newA);
+			var newText = document.createTextNode(data[i].menu);
+			newA.appendChild(newText);
+		}
+		function sss(){
+			var newA2 = document.createElement('a');
+			newA2.setAttribute('href','#none');
+			var getA = document.getElementsByClassName('link_txt');
+			getA[i].appendChild(newA2);
+			var newText2 = document.createTextNode(data[i].submenu[j]);
+			newA2.appendChild(newText2);
+		}
+		for (var i = 0; i < data.length; i++) {
+			ttt();
+			for (var j = 0; j < data[i].submenu.length; j++) {
+				sss();
+			}
+		}
+
+		// Event Set
+		var getA = document.getElementsByClassName('link_txt');
+		// this
+		for (var i = 0; i < getA.length; i++) {
+			getA[i].addEventListener("mouseover", mouseOver );
+			getA[i].addEventListener("mouseout", mouseLeave );
+		}
+		
+		function mouseOver() {
+			var child_A = this.getElementsByTagName('a');
+			for (var i = 0; i < child_A.length; i++) {
+				child_A[i].style.display = 'block';
+			}
+		}
+		function mouseLeave(){
+			var child_A = this.getElementsByTagName('a');
+			for (var i = 0; i < child_A.length; i++) {
+				child_A[i].style.display = 'none';
+			}
+		}
+	</script>
+</body>
+</html>
