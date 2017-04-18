@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Calendat</title>
+	<script type="text/javascript" src="libs/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<style>
+
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+/* Month header */
+.month {
+    padding: 70px 25px;
+    background: #1abc9c;
+    text-align: center;
+}
+
+/* Month list */
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* Previous button inside month header */
+.month .prev {
+    float: left;
+    padding-top: 10px;
+}
+
+/* Next button */
+.month .next {
+    float: right;
+    padding-top: 10px;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color:#ddd;
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 12.6%;
+    color: #666;
+    text-align: center;
+}
+
+/* Days (1-31) */
+.days {
+    padding: 10px 0;
+    background: #eee;
+    margin: 0;
+}
+
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 12.6%;
+    height: 30px;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size:12px;
+    color:#777;
+}
+
+/* Highlight the "current" day */
+.days li .active {
+    padding: 5px;
+    background: #1abc9c;
+    color: white !important
+}
+</style>
+<body>
+<div class="month"> 
+	  <ul>
+	    <li class="prev">&#10094;</li>
+	    <li class="next">&#10095;</li>
+	    <li>
+	      <span id="month">August</span><br>
+	      <span id="demo" style="font-size:18px">2016</span>
+	    </li>
+	  </ul>
+</div>
+
+<ul class="weekdays">
+  <li>Mo</li>
+  <li>Tu</li>
+  <li>We</li>
+  <li>Th</li>
+  <li>Fr</li>
+  <li>Sa</li>
+  <li>Su</li>
+</ul>
+
+<ul class="days"> 
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <!-- <span class="active">10</span> -->
+</ul>
+<script type="text/javascript">
+	// 1일부터 마지막일까지 매 월이 30, 31일 씩 다르니까 , 마지막 일을 구하고 얼만큼 그려줄지 for문으로 돌림
+	// 1일부터 끝 일 까지 구함.
+	// 그 후에 일만 그림. for문
+
+
+	var d = new Date();
+	document.getElementById('demo').innerHTML = d.getFullYear();
+	document.getElementById('month').innerHTML = d.getMonth() + 1 + '월';
+	var dayList = document.getElementsByClassName('days')[0];
+	var days = dayList.getElementsByTagName('li');
+	var day = d.getDay();
+	var monthCurrent = d.getDate(); // 시작하는 날
+
+
+	for(var i = monthCurrent; i < ; i++) {
+
+	}
+
+	
+	// for(var i = 0; i < days.length; i++) {
+	// 	//for문을 돌면서 monthCurrent (6) li를 비우고 시작.
+		
+	// 	if(i > monthCurrent) {
+	// 		days.innerHTML += '';
+			
+	// 	}else {
+	// 		days.innerHTML += i+1;
+	// 	}
+	// }
+
+	function getMondayOfCurrentWeek(d) {
+		var day = d.getDay();
+		return new Date(d.getDate() + (day == 0 ? -6 : 1) - day);
+	}
+	function getSundayOfCurrentWeek(d) {
+		var day = d.getDay();
+		return new Date(d.getFullYear(), d.getMonth(), d.getDate() + (day == 0 ? 0 : 7) - day);
+	}
+	
+	function getFirstDayOfCurrentMonth(d){
+		return new Date(d.getFullYear(), d.getMonth(), 1);
+	}
+
+	function getLastDayOfCurrentMonth(d){
+		return new Date(d.getFullYear(), d.getMonth()+1, 0);
+	}
+	
+</script>
+</body>
+</html>
